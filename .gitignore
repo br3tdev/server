@@ -75,3 +75,5 @@ typings/
 dist
 .vercel
 .env*.local
+
+/src/generated/prisma
