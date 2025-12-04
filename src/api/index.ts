@@ -30,13 +30,17 @@
 
 
 import express from "express"
+import bodyParser from "body-parser";
 import menu from "./menu"
 
 const router = express.Router();
 
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
 // Register the USSD APP
 router.post("/", (req, res) => {
-  menu().run(req.body, (ussdResult: any) => {
+  menu(req).run(req.body, (ussdResult: any) => {
     res.send(ussdResult)
   })
 })
