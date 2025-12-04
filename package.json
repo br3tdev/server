@@ -14,7 +14,7 @@
     "db:migrate": "prisma migrate dev --name init",
     "db:studio": "prisma studio",
     "typecheck": "tsc --noEmit",
-    "vercel-build": "echo hello"
+    "vercel-build": "pnpm db:generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.1.0",
