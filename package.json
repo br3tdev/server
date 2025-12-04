@@ -10,6 +10,9 @@
     "build": "tsc",
     "lint": "eslint --fix src test",
     "test": "vitest run",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev --name init",
+    "db:studio": "prisma studio",
     "typecheck": "tsc --noEmit",
     "vercel-build": "echo hello"
   },
