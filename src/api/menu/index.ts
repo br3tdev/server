@@ -57,7 +57,7 @@ import { prisma } from "../../../lib/db"
 
 let menu = new UssdMenu();
 
-const index = () => {
+const index = (req: unknown) => {
     menu.startState({
         run: async () => {
             const { phoneNumber } = menu.args;
