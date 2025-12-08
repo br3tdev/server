@@ -9,7 +9,17 @@
 * 🟢 You can import this file directly.
 */
 
+export const Sharing = {
+  PF: 'PF',
+  PP: 'PP'
+} as const
+
+export type Sharing = (typeof Sharing)[keyof typeof Sharing]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const Relationship = {
+  SP: 'SP',
+  CH: 'CH'
+} as const
+
+export type Relationship = (typeof Relationship)[keyof typeof Relationship]

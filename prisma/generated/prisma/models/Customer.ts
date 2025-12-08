@@ -43,6 +43,7 @@ export type CustomerSumAggregateOutputType = {
 export type CustomerMinAggregateOutputType = {
   code: number | null
   fullName: string | null
+  email: string | null
   mobileNumber: string | null
   idNumber: string | null
   dob: string | null
@@ -54,6 +55,7 @@ export type CustomerMinAggregateOutputType = {
 export type CustomerMaxAggregateOutputType = {
   code: number | null
   fullName: string | null
+  email: string | null
   mobileNumber: string | null
   idNumber: string | null
   dob: string | null
@@ -65,6 +67,7 @@ export type CustomerMaxAggregateOutputType = {
 export type CustomerCountAggregateOutputType = {
   code: number
   fullName: number
+  email: number
   mobileNumber: number
   idNumber: number
   dob: number
@@ -92,6 +95,7 @@ export type CustomerSumAggregateInputType = {
 export type CustomerMinAggregateInputType = {
   code?: true
   fullName?: true
+  email?: true
   mobileNumber?: true
   idNumber?: true
   dob?: true
@@ -103,6 +107,7 @@ export type CustomerMinAggregateInputType = {
 export type CustomerMaxAggregateInputType = {
   code?: true
   fullName?: true
+  email?: true
   mobileNumber?: true
   idNumber?: true
   dob?: true
@@ -114,6 +119,7 @@ export type CustomerMaxAggregateInputType = {
 export type CustomerCountAggregateInputType = {
   code?: true
   fullName?: true
+  email?: true
   mobileNumber?: true
   idNumber?: true
   dob?: true
@@ -212,6 +218,7 @@ export type CustomerGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type CustomerGroupByOutputType = {
   code: number
   fullName: string
+  email: string
   mobileNumber: string
   idNumber: string
   dob: string
@@ -246,23 +253,29 @@ export type CustomerWhereInput = {
   NOT?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[]
   code?: Prisma.IntFilter<"Customer"> | number
   fullName?: Prisma.StringFilter<"Customer"> | string
+  email?: Prisma.StringFilter<"Customer"> | string
   mobileNumber?: Prisma.StringFilter<"Customer"> | string
   idNumber?: Prisma.StringFilter<"Customer"> | string
   dob?: Prisma.StringFilter<"Customer"> | string
   famSize?: Prisma.IntFilter<"Customer"> | number
   premium?: Prisma.FloatFilter<"Customer"> | number
   productCode?: Prisma.IntFilter<"Customer"> | number
+  product?: Prisma.XOR<Prisma.MedicalProductScalarRelationFilter, Prisma.MedicalProductWhereInput>
+  dependants?: Prisma.CustomerDependantListRelationFilter
 }
 
 export type CustomerOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
   dob?: Prisma.SortOrder
   famSize?: Prisma.SortOrder
   premium?: Prisma.SortOrder
   productCode?: Prisma.SortOrder
+  product?: Prisma.MedicalProductOrderByWithRelationInput
+  dependants?: Prisma.CustomerDependantOrderByRelationAggregateInput
 }
 
 export type CustomerWhereUniqueInput = Prisma.AtLeast<{
@@ -271,17 +284,21 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CustomerWhereInput[]
   NOT?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[]
   fullName?: Prisma.StringFilter<"Customer"> | string
+  email?: Prisma.StringFilter<"Customer"> | string
   mobileNumber?: Prisma.StringFilter<"Customer"> | string
   idNumber?: Prisma.StringFilter<"Customer"> | string
   dob?: Prisma.StringFilter<"Customer"> | string
   famSize?: Prisma.IntFilter<"Customer"> | number
   premium?: Prisma.FloatFilter<"Customer"> | number
   productCode?: Prisma.IntFilter<"Customer"> | number
+  product?: Prisma.XOR<Prisma.MedicalProductScalarRelationFilter, Prisma.MedicalProductWhereInput>
+  dependants?: Prisma.CustomerDependantListRelationFilter
 }, "code">
 
 export type CustomerOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -301,6 +318,7 @@ export type CustomerScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CustomerScalarWhereWithAggregatesInput | Prisma.CustomerScalarWhereWithAggregatesInput[]
   code?: Prisma.IntWithAggregatesFilter<"Customer"> | number
   fullName?: Prisma.StringWithAggregatesFilter<"Customer"> | string
+  email?: Prisma.StringWithAggregatesFilter<"Customer"> | string
   mobileNumber?: Prisma.StringWithAggregatesFilter<"Customer"> | string
   idNumber?: Prisma.StringWithAggregatesFilter<"Customer"> | string
   dob?: Prisma.StringWithAggregatesFilter<"Customer"> | string
@@ -311,49 +329,58 @@ export type CustomerScalarWhereWithAggregatesInput = {
 
 export type CustomerCreateInput = {
   fullName: string
+  email: string
   mobileNumber: string
   idNumber: string
   dob: string
   famSize: number
   premium: number
-  productCode: number
+  product: Prisma.MedicalProductCreateNestedOneWithoutCustomersInput
+  dependants?: Prisma.CustomerDependantCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateInput = {
   code?: number
   fullName: string
+  email: string
   mobileNumber: string
   idNumber: string
   dob: string
   famSize: number
   premium: number
   productCode: number
+  dependants?: Prisma.CustomerDependantUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUpdateInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
   famSize?: Prisma.IntFieldUpdateOperationsInput | number
   premium?: Prisma.FloatFieldUpdateOperationsInput | number
-  productCode?: Prisma.IntFieldUpdateOperationsInput | number
+  product?: Prisma.MedicalProductUpdateOneRequiredWithoutCustomersNestedInput
+  dependants?: Prisma.CustomerDependantUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
   famSize?: Prisma.IntFieldUpdateOperationsInput | number
   premium?: Prisma.FloatFieldUpdateOperationsInput | number
   productCode?: Prisma.IntFieldUpdateOperationsInput | number
+  dependants?: Prisma.CustomerDependantUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyInput = {
   code?: number
   fullName: string
+  email: string
   mobileNumber: string
   idNumber: string
   dob: string
@@ -364,17 +391,18 @@ export type CustomerCreateManyInput = {
 
 export type CustomerUpdateManyMutationInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
   famSize?: Prisma.IntFieldUpdateOperationsInput | number
   premium?: Prisma.FloatFieldUpdateOperationsInput | number
-  productCode?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type CustomerUncheckedUpdateManyInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
   idNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
@@ -383,9 +411,20 @@ export type CustomerUncheckedUpdateManyInput = {
   productCode?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
+export type CustomerListRelationFilter = {
+  every?: Prisma.CustomerWhereInput
+  some?: Prisma.CustomerWhereInput
+  none?: Prisma.CustomerWhereInput
+}
+
+export type CustomerOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type CustomerCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -404,6 +443,7 @@ export type CustomerAvgOrderByAggregateInput = {
 export type CustomerMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -415,6 +455,7 @@ export type CustomerMaxOrderByAggregateInput = {
 export type CustomerMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   mobileNumber?: Prisma.SortOrder
   idNumber?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -430,16 +471,51 @@ export type CustomerSumOrderByAggregateInput = {
   productCode?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type CustomerNullableScalarRelationFilter = {
+  is?: Prisma.CustomerWhereInput | null
+  isNot?: Prisma.CustomerWhereInput | null
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type CustomerCreateNestedManyWithoutProductInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutProductInput, Prisma.CustomerUncheckedCreateWithoutProductInput> | Prisma.CustomerCreateWithoutProductInput[] | Prisma.CustomerUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutProductInput | Prisma.CustomerCreateOrConnectWithoutProductInput[]
+  createMany?: Prisma.CustomerCreateManyProductInputEnvelope
+  connect?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+}
+
+export type CustomerUncheckedCreateNestedManyWithoutProductInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutProductInput, Prisma.CustomerUncheckedCreateWithoutProductInput> | Prisma.CustomerCreateWithoutProductInput[] | Prisma.CustomerUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutProductInput | Prisma.CustomerCreateOrConnectWithoutProductInput[]
+  createMany?: Prisma.CustomerCreateManyProductInputEnvelope
+  connect?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+}
+
+export type CustomerUpdateManyWithoutProductNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutProductInput, Prisma.CustomerUncheckedCreateWithoutProductInput> | Prisma.CustomerCreateWithoutProductInput[] | Prisma.CustomerUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutProductInput | Prisma.CustomerCreateOrConnectWithoutProductInput[]
+  upsert?: Prisma.CustomerUpsertWithWhereUniqueWithoutProductInput | Prisma.CustomerUpsertWithWhereUniqueWithoutProductInput[]
+  createMany?: Prisma.CustomerCreateManyProductInputEnvelope
+  set?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  disconnect?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  delete?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  connect?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  update?: Prisma.CustomerUpdateWithWhereUniqueWithoutProductInput | Prisma.CustomerUpdateWithWhereUniqueWithoutProductInput[]
+  updateMany?: Prisma.CustomerUpdateManyWithWhereWithoutProductInput | Prisma.CustomerUpdateManyWithWhereWithoutProductInput[]
+  deleteMany?: Prisma.CustomerScalarWhereInput | Prisma.CustomerScalarWhereInput[]
+}
+
+export type CustomerUncheckedUpdateManyWithoutProductNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutProductInput, Prisma.CustomerUncheckedCreateWithoutProductInput> | Prisma.CustomerCreateWithoutProductInput[] | Prisma.CustomerUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutProductInput | Prisma.CustomerCreateOrConnectWithoutProductInput[]
+  upsert?: Prisma.CustomerUpsertWithWhereUniqueWithoutProductInput | Prisma.CustomerUpsertWithWhereUniqueWithoutProductInput[]
+  createMany?: Prisma.CustomerCreateManyProductInputEnvelope
+  set?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  disconnect?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  delete?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  connect?: Prisma.CustomerWhereUniqueInput | Prisma.CustomerWhereUniqueInput[]
+  update?: Prisma.CustomerUpdateWithWhereUniqueWithoutProductInput | Prisma.CustomerUpdateWithWhereUniqueWithoutProductInput[]
+  updateMany?: Prisma.CustomerUpdateManyWithWhereWithoutProductInput | Prisma.CustomerUpdateManyWithWhereWithoutProductInput[]
+  deleteMany?: Prisma.CustomerScalarWhereInput | Prisma.CustomerScalarWhereInput[]
 }
 
 export type FloatFieldUpdateOperationsInput = {
@@ -450,44 +526,269 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type CustomerCreateNestedOneWithoutDependantsInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutDependantsInput, Prisma.CustomerUncheckedCreateWithoutDependantsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutDependantsInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneWithoutDependantsNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutDependantsInput, Prisma.CustomerUncheckedCreateWithoutDependantsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutDependantsInput
+  upsert?: Prisma.CustomerUpsertWithoutDependantsInput
+  disconnect?: Prisma.CustomerWhereInput | boolean
+  delete?: Prisma.CustomerWhereInput | boolean
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutDependantsInput, Prisma.CustomerUpdateWithoutDependantsInput>, Prisma.CustomerUncheckedUpdateWithoutDependantsInput>
+}
+
+export type CustomerCreateWithoutProductInput = {
+  fullName: string
+  email: string
+  mobileNumber: string
+  idNumber: string
+  dob: string
+  famSize: number
+  premium: number
+  dependants?: Prisma.CustomerDependantCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutProductInput = {
+  code?: number
+  fullName: string
+  email: string
+  mobileNumber: string
+  idNumber: string
+  dob: string
+  famSize: number
+  premium: number
+  dependants?: Prisma.CustomerDependantUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutProductInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutProductInput, Prisma.CustomerUncheckedCreateWithoutProductInput>
+}
+
+export type CustomerCreateManyProductInputEnvelope = {
+  data: Prisma.CustomerCreateManyProductInput | Prisma.CustomerCreateManyProductInput[]
+  skipDuplicates?: boolean
+}
+
+export type CustomerUpsertWithWhereUniqueWithoutProductInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutProductInput, Prisma.CustomerUncheckedUpdateWithoutProductInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutProductInput, Prisma.CustomerUncheckedCreateWithoutProductInput>
+}
+
+export type CustomerUpdateWithWhereUniqueWithoutProductInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutProductInput, Prisma.CustomerUncheckedUpdateWithoutProductInput>
+}
+
+export type CustomerUpdateManyWithWhereWithoutProductInput = {
+  where: Prisma.CustomerScalarWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateManyMutationInput, Prisma.CustomerUncheckedUpdateManyWithoutProductInput>
+}
+
+export type CustomerScalarWhereInput = {
+  AND?: Prisma.CustomerScalarWhereInput | Prisma.CustomerScalarWhereInput[]
+  OR?: Prisma.CustomerScalarWhereInput[]
+  NOT?: Prisma.CustomerScalarWhereInput | Prisma.CustomerScalarWhereInput[]
+  code?: Prisma.IntFilter<"Customer"> | number
+  fullName?: Prisma.StringFilter<"Customer"> | string
+  email?: Prisma.StringFilter<"Customer"> | string
+  mobileNumber?: Prisma.StringFilter<"Customer"> | string
+  idNumber?: Prisma.StringFilter<"Customer"> | string
+  dob?: Prisma.StringFilter<"Customer"> | string
+  famSize?: Prisma.IntFilter<"Customer"> | number
+  premium?: Prisma.FloatFilter<"Customer"> | number
+  productCode?: Prisma.IntFilter<"Customer"> | number
+}
+
+export type CustomerCreateWithoutDependantsInput = {
+  fullName: string
+  email: string
+  mobileNumber: string
+  idNumber: string
+  dob: string
+  famSize: number
+  premium: number
+  product: Prisma.MedicalProductCreateNestedOneWithoutCustomersInput
+}
+
+export type CustomerUncheckedCreateWithoutDependantsInput = {
+  code?: number
+  fullName: string
+  email: string
+  mobileNumber: string
+  idNumber: string
+  dob: string
+  famSize: number
+  premium: number
+  productCode: number
+}
+
+export type CustomerCreateOrConnectWithoutDependantsInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutDependantsInput, Prisma.CustomerUncheckedCreateWithoutDependantsInput>
+}
+
+export type CustomerUpsertWithoutDependantsInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutDependantsInput, Prisma.CustomerUncheckedUpdateWithoutDependantsInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutDependantsInput, Prisma.CustomerUncheckedCreateWithoutDependantsInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutDependantsInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutDependantsInput, Prisma.CustomerUncheckedUpdateWithoutDependantsInput>
+}
+
+export type CustomerUpdateWithoutDependantsInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  idNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.StringFieldUpdateOperationsInput | string
+  famSize?: Prisma.IntFieldUpdateOperationsInput | number
+  premium?: Prisma.FloatFieldUpdateOperationsInput | number
+  product?: Prisma.MedicalProductUpdateOneRequiredWithoutCustomersNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutDependantsInput = {
+  code?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  idNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.StringFieldUpdateOperationsInput | string
+  famSize?: Prisma.IntFieldUpdateOperationsInput | number
+  premium?: Prisma.FloatFieldUpdateOperationsInput | number
+  productCode?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type CustomerCreateManyProductInput = {
+  code?: number
+  fullName: string
+  email: string
+  mobileNumber: string
+  idNumber: string
+  dob: string
+  famSize: number
+  premium: number
+}
+
+export type CustomerUpdateWithoutProductInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  idNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.StringFieldUpdateOperationsInput | string
+  famSize?: Prisma.IntFieldUpdateOperationsInput | number
+  premium?: Prisma.FloatFieldUpdateOperationsInput | number
+  dependants?: Prisma.CustomerDependantUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutProductInput = {
+  code?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  idNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.StringFieldUpdateOperationsInput | string
+  famSize?: Prisma.IntFieldUpdateOperationsInput | number
+  premium?: Prisma.FloatFieldUpdateOperationsInput | number
+  dependants?: Prisma.CustomerDependantUncheckedUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateManyWithoutProductInput = {
+  code?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  idNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dob?: Prisma.StringFieldUpdateOperationsInput | string
+  famSize?: Prisma.IntFieldUpdateOperationsInput | number
+  premium?: Prisma.FloatFieldUpdateOperationsInput | number
+}
+
+
+/**
+ * Count Type CustomerCountOutputType
+ */
+
+export type CustomerCountOutputType = {
+  dependants: number
+}
+
+export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  dependants?: boolean | CustomerCountOutputTypeCountDependantsArgs
+}
+
+/**
+ * CustomerCountOutputType without action
+ */
+export type CustomerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomerCountOutputType
+   */
+  select?: Prisma.CustomerCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CustomerCountOutputType without action
+ */
+export type CustomerCountOutputTypeCountDependantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomerDependantWhereInput
+}
 
 
 export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   fullName?: boolean
+  email?: boolean
   mobileNumber?: boolean
   idNumber?: boolean
   dob?: boolean
   famSize?: boolean
   premium?: boolean
   productCode?: boolean
+  product?: boolean | Prisma.MedicalProductDefaultArgs<ExtArgs>
+  dependants?: boolean | Prisma.Customer$dependantsArgs<ExtArgs>
+  _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
 export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   fullName?: boolean
+  email?: boolean
   mobileNumber?: boolean
   idNumber?: boolean
   dob?: boolean
   famSize?: boolean
   premium?: boolean
   productCode?: boolean
+  product?: boolean | Prisma.MedicalProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
 export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   fullName?: boolean
+  email?: boolean
   mobileNumber?: boolean
   idNumber?: boolean
   dob?: boolean
   famSize?: boolean
   premium?: boolean
   productCode?: boolean
+  product?: boolean | Prisma.MedicalProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
 export type CustomerSelectScalar = {
   code?: boolean
   fullName?: boolean
+  email?: boolean
   mobileNumber?: boolean
   idNumber?: boolean
   dob?: boolean
@@ -496,14 +797,29 @@ export type CustomerSelectScalar = {
   productCode?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "fullName" | "mobileNumber" | "idNumber" | "dob" | "famSize" | "premium" | "productCode", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "fullName" | "email" | "mobileNumber" | "idNumber" | "dob" | "famSize" | "premium" | "productCode", ExtArgs["result"]["customer"]>
+export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  product?: boolean | Prisma.MedicalProductDefaultArgs<ExtArgs>
+  dependants?: boolean | Prisma.Customer$dependantsArgs<ExtArgs>
+  _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type CustomerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  product?: boolean | Prisma.MedicalProductDefaultArgs<ExtArgs>
+}
+export type CustomerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  product?: boolean | Prisma.MedicalProductDefaultArgs<ExtArgs>
+}
 
 export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Customer"
-  objects: {}
+  objects: {
+    product: Prisma.$MedicalProductPayload<ExtArgs>
+    dependants: Prisma.$CustomerDependantPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     code: number
     fullName: string
+    email: string
     mobileNumber: string
     idNumber: string
     dob: string
@@ -904,6 +1220,8 @@ readonly fields: CustomerFieldRefs;
  */
 export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  product<T extends Prisma.MedicalProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MedicalProductDefaultArgs<ExtArgs>>): Prisma.Prisma__MedicalProductClient<runtime.Types.Result.GetResult<Prisma.$MedicalProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  dependants<T extends Prisma.Customer$dependantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$dependantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerDependantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -935,6 +1253,7 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
 export interface CustomerFieldRefs {
   readonly code: Prisma.FieldRef<"Customer", 'Int'>
   readonly fullName: Prisma.FieldRef<"Customer", 'String'>
+  readonly email: Prisma.FieldRef<"Customer", 'String'>
   readonly mobileNumber: Prisma.FieldRef<"Customer", 'String'>
   readonly idNumber: Prisma.FieldRef<"Customer", 'String'>
   readonly dob: Prisma.FieldRef<"Customer", 'String'>
@@ -958,6 +1277,10 @@ export type CustomerFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  /**
    * Filter, which Customer to fetch.
    */
   where: Prisma.CustomerWhereUniqueInput
@@ -976,6 +1299,10 @@ export type CustomerFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  /**
    * Filter, which Customer to fetch.
    */
   where: Prisma.CustomerWhereUniqueInput
@@ -993,6 +1320,10 @@ export type CustomerFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Customer
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
   /**
    * Filter, which Customer to fetch.
    */
@@ -1042,6 +1373,10 @@ export type CustomerFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  /**
    * Filter, which Customer to fetch.
    */
   where?: Prisma.CustomerWhereInput
@@ -1090,6 +1425,10 @@ export type CustomerFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  /**
    * Filter, which Customers to fetch.
    */
   where?: Prisma.CustomerWhereInput
@@ -1133,6 +1472,10 @@ export type CustomerCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  /**
    * The data needed to create a Customer.
    */
   data: Prisma.XOR<Prisma.CustomerCreateInput, Prisma.CustomerUncheckedCreateInput>
@@ -1166,6 +1509,10 @@ export type CustomerCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    */
   data: Prisma.CustomerCreateManyInput | Prisma.CustomerCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1180,6 +1527,10 @@ export type CustomerUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Customer
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
   /**
    * The data needed to update a Customer.
    */
@@ -1232,6 +1583,10 @@ export type CustomerUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many Customers to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1246,6 +1601,10 @@ export type CustomerUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Customer
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
   /**
    * The filter to search for the Customer to update in case it exists.
    */
@@ -1273,6 +1632,10 @@ export type CustomerDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  /**
    * Filter which Customer to delete.
    */
   where: Prisma.CustomerWhereUniqueInput
@@ -1293,6 +1656,30 @@ export type CustomerDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Customer.dependants
+ */
+export type Customer$dependantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomerDependant
+   */
+  select?: Prisma.CustomerDependantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CustomerDependant
+   */
+  omit?: Prisma.CustomerDependantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerDependantInclude<ExtArgs> | null
+  where?: Prisma.CustomerDependantWhereInput
+  orderBy?: Prisma.CustomerDependantOrderByWithRelationInput | Prisma.CustomerDependantOrderByWithRelationInput[]
+  cursor?: Prisma.CustomerDependantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomerDependantScalarFieldEnum | Prisma.CustomerDependantScalarFieldEnum[]
+}
+
+/**
  * Customer without action
  */
 export type CustomerDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1304,4 +1691,8 @@ export type CustomerDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Customer
    */
   omit?: Prisma.CustomerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
 }

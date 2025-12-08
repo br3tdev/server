@@ -51,7 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Customer: 'Customer'
+  MedicalProduct: 'MedicalProduct',
+  ProductLimit: 'ProductLimit',
+  ProductRate: 'ProductRate',
+  Customer: 'Customer',
+  CustomerDependant: 'CustomerDependant'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,9 +74,40 @@ export const TransactionIsolationLevel = {
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const MedicalProductScalarFieldEnum = {
+  code: 'code',
+  name: 'name'
+} as const
+
+export type MedicalProductScalarFieldEnum = (typeof MedicalProductScalarFieldEnum)[keyof typeof MedicalProductScalarFieldEnum]
+
+
+export const ProductLimitScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  limit: 'limit',
+  rate: 'rate',
+  active: 'active',
+  medicalProductCode: 'medicalProductCode'
+} as const
+
+export type ProductLimitScalarFieldEnum = (typeof ProductLimitScalarFieldEnum)[keyof typeof ProductLimitScalarFieldEnum]
+
+
+export const ProductRateScalarFieldEnum = {
+  code: 'code',
+  productCode: 'productCode',
+  familySize: 'familySize',
+  sharing: 'sharing'
+} as const
+
+export type ProductRateScalarFieldEnum = (typeof ProductRateScalarFieldEnum)[keyof typeof ProductRateScalarFieldEnum]
+
+
 export const CustomerScalarFieldEnum = {
   code: 'code',
   fullName: 'fullName',
+  email: 'email',
   mobileNumber: 'mobileNumber',
   idNumber: 'idNumber',
   dob: 'dob',
@@ -82,6 +117,17 @@ export const CustomerScalarFieldEnum = {
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const CustomerDependantScalarFieldEnum = {
+  code: 'code',
+  fullName: 'fullName',
+  dob: 'dob',
+  relationship: 'relationship',
+  customerCode: 'customerCode'
+} as const
+
+export type CustomerDependantScalarFieldEnum = (typeof CustomerDependantScalarFieldEnum)[keyof typeof CustomerDependantScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -98,4 +144,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 import type MessageResponse from "./interfaces/message-response.js";
 
+import { prisma } from "../lib/db";
 import api from "./api/index.js";
 import * as middlewares from "./middlewares.js";
 
@@ -20,6 +21,24 @@ app.get<object, MessageResponse>("/", (req, res) => {
     message: "USSD api",
   });
 });
+
+app.get<object, unknown>("/health", async (req, res) => {
+  const start = Date.now();
+
+  let db = "down";
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    db = "up";
+  } catch (_) {}
+
+  res.status(200).json({
+    status: "OK",
+    uptime: process.uptime(),
+    timestamp: Date.now(),
+    environment: process.env.NODE_ENV,
+    db
+  });
+})
 
 app.use("/api/v1", api);
 
