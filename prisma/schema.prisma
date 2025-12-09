@@ -13,14 +13,67 @@ datasource db {
   provider = "postgresql"
 }
 
+model MedicalProduct {
+  code          Int      @id @default(autoincrement())
+  name          String   @unique
+  productLimits ProductLimit[]
+  customers     Customer[]
+  productRates  ProductRate[]
+}
+
+model ProductLimit {
+  code           Int              @id @default(autoincrement())
+  name           String
+  limit          Int
+  rate           Int
+  active         Boolean          @default(true)
+  medicalProduct MedicalProduct?  @relation(fields: [medicalProductCode], references: [code])
+  medicalProductCode Int?
+  
+  @@unique([medicalProductCode, name])
+}
+
+model ProductRate {
+  code        Int      @id @default(autoincrement())
+  product     MedicalProduct @relation(fields: [productCode], references: [code])
+  productCode Int
+  familySize  Int
+  sharing     Sharing
+  
+  @@unique([productCode, familySize, sharing])
+}
+
+enum Sharing {
+  PF
+  PP
+}
 
 model Customer {
   code        Int                  @id @default(autoincrement())
   fullName    String
+  email       String
   mobileNumber String
   idNumber    String
   dob         String
   famSize     Int
   premium     Float
+  product     MedicalProduct       @relation(fields: [productCode], references: [code])
   productCode Int
+  dependants  CustomerDependant[]
+}
+
+model CustomerDependant {
+  code         Int           @id @default(autoincrement())
+  fullName     String
+  dob          String
+  relationship Relationship
+  customer     Customer?     @relation(fields: [customerCode], references: [code])
+  customerCode Int?
+  
+  @@unique([customerCode, fullName, dob])
+}
+
+enum Relationship {
+  SP
+  CH
 }

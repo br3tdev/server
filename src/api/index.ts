@@ -1,29 +1,17 @@
-import express from "express";
-
-import { prisma } from "../../lib/db"
-
-import type MessageResponse from "../interfaces/message-response.js";
-
-import emojis from "./emojis.js";
+import express from "express"
+import bodyParser from "body-parser";
+import menu from "./menu"
 
 const router = express.Router();
 
-// router.get<object, MessageResponse>("/", (req, res) => {
-//   res.json({
-//     message: "API - 👋🌎🌍🌏",
-//   });
-// });
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/", async (req, res) => {
-  const customer = await prisma.customer.findFirst({
-    where: {
-      idNumber: "32518496"
-    }
+// Register the USSD APP
+router.post("/", (req, res) => {
+  menu(req).run(req.body, (ussdResult: any) => {
+    res.send(ussdResult)
   })
-
-  res.json(customer)
 })
-
-router.use("/emojis", emojis);
 
 export default router;
