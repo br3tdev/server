@@ -1,17 +1,13 @@
 import express from "express"
 import _ from "lodash";
-import UssdMenu from "ussd-builder";
+import UssdMenu from "ussd-menu-builder";
 
 import medical from "./medical"
 import domestic from "./domestic"
 import motor from "./motor"
 
 
-const dashboardInstructions = `Choose a product: 
-\n1. Domestic Package 
-\n2. Medical Cover 
-\n3. Motor Insurance 
-`
+const dashboardInstructions = `Choose a product:\n1. Domestic Package\n2. Medical Cover\n3. Motor Insurance\n4. Personal Accident`
 
 const dashboard = (menu: UssdMenu) => {
     menu.state("dashboard", {
@@ -32,13 +28,7 @@ const dashboard = (menu: UssdMenu) => {
         defaultNext: "dashboard"
     });
 
-    menu.state("gis", {
-        run: () => {
-            menu.end("GIS user flow would go here");
-        }
-    });
-
-    _.over([medical, domestic, motor])(menu)
+    _.over([domestic, medical, motor])(menu)
 }
 
 export default dashboard;

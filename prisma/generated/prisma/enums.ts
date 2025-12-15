@@ -18,8 +18,8 @@ export type Sharing = (typeof Sharing)[keyof typeof Sharing]
 
 
 export const Relationship = {
-  SP: 'SP',
-  CH: 'CH'
+  SPOUSE: 'SPOUSE',
+  CHILD: 'CHILD'
 } as const
 
 export type Relationship = (typeof Relationship)[keyof typeof Relationship]

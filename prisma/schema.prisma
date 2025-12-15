@@ -3,10 +3,9 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
-  output   = "./generated/prisma"
+  output = "./generated/prisma"
 }
 
 datasource db {
@@ -14,33 +13,54 @@ datasource db {
 }
 
 model MedicalProduct {
-  code          Int      @id @default(autoincrement())
-  name          String   @unique
-  productLimits ProductLimit[]
-  customers     Customer[]
-  productRates  ProductRate[]
+  code                      Int                    @id @default(autoincrement())
+  name                      String                 @unique
+  benefits                  MedicalBenefits[]
+  MedicalCustomerPolicy     MedicalCustomerPolicy? @relation(fields: [medicalCustomerPolicyCode], references: [code])
+  medicalCustomerPolicyCode Int?
 }
 
-model ProductLimit {
-  code           Int              @id @default(autoincrement())
-  name           String
-  limit          Int
-  rate           Int
-  active         Boolean          @default(true)
-  medicalProduct MedicalProduct?  @relation(fields: [medicalProductCode], references: [code])
-  medicalProductCode Int?
-  
-  @@unique([medicalProductCode, name])
+model MedicalBenefits {
+  code                Int            @id @default(autoincrement())
+  name                String         @unique
+  medicalProduct      MedicalProduct @relation(fields: [medicalProductCode], references: [code])
+  medicalProductCode  Int
 }
 
-model ProductRate {
-  code        Int      @id @default(autoincrement())
-  product     MedicalProduct @relation(fields: [productCode], references: [code])
-  productCode Int
-  familySize  Int
-  sharing     Sharing
-  
-  @@unique([productCode, familySize, sharing])
+model MedicalCustomer {
+  code         Int                     @id @default(autoincrement())
+  fullName     String
+  dob          String
+  idNumber     String
+  email        String
+  mobileNumber String
+  dependants   CustomerDependant[]
+  policies     MedicalCustomerPolicy[]
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+
+  @@unique([email])
+  @@unique([idNumber])
+  @@index([mobileNumber])
+}
+
+model MedicalCustomerPolicy {
+  code         Int              @id @default(autoincrement())
+  customer     MedicalCustomer  @relation(fields: [customerCode], references: [code])
+  customerCode Int
+  premium      Decimal          @db.Decimal(12, 2)
+  products     MedicalProduct[]
+}
+
+model CustomerDependant {
+  code         Int             @id @default(autoincrement())
+  fullName     String
+  dob          String
+  relationship Relationship
+  customer     MedicalCustomer @relation(fields: [customerCode], references: [code])
+  customerCode Int
+
+  @@unique([customerCode, fullName])
 }
 
 enum Sharing {
@@ -48,32 +68,7 @@ enum Sharing {
   PP
 }
 
-model Customer {
-  code        Int                  @id @default(autoincrement())
-  fullName    String
-  email       String
-  mobileNumber String
-  idNumber    String
-  dob         String
-  famSize     Int
-  premium     Float
-  product     MedicalProduct       @relation(fields: [productCode], references: [code])
-  productCode Int
-  dependants  CustomerDependant[]
-}
-
-model CustomerDependant {
-  code         Int           @id @default(autoincrement())
-  fullName     String
-  dob          String
-  relationship Relationship
-  customer     Customer?     @relation(fields: [customerCode], references: [code])
-  customerCode Int?
-  
-  @@unique([customerCode, fullName, dob])
-}
-
 enum Relationship {
-  SP
-  CH
+  SPOUSE
+  CHILD
 }

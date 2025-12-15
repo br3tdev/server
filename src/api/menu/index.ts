@@ -1,5 +1,5 @@
 import express from "express"
-import UssdMenu from "ussd-builder"
+import UssdMenu from "ussd-menu-builder"
 import _ from "lodash"
 
 import dashboard from "./dashboard"

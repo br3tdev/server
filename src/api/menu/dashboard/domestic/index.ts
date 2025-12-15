@@ -1,5 +1,5 @@
 import express from "express"
-import UssdMenu from "ussd-builder"
+import UssdMenu from "ussd-menu-builder"
 import _ from "lodash"
 
 import { prisma } from "../../../../../lib/db";
@@ -8,8 +8,8 @@ import { prisma } from "../../../../../lib/db";
 
 const domesticInstructions = `Domestic user flow ends up here.`
 
-const index = (menu: UssdMenu) => {
-    menu.startState({
+const domestic = (menu: UssdMenu) => {
+    menu.state("dashboard.domestic", {
         run: async () => {
             menu.con(domesticInstructions)
         },
@@ -29,4 +29,4 @@ const index = (menu: UssdMenu) => {
     return menu;
 }
 
-export default index;
+export default domestic;

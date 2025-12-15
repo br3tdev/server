@@ -15,5 +15,5 @@
     "./*.js",
     "src/**/*.ts",
     "test/**/*.ts"
-  ]
+, "utils/common.ts"  ]
 }

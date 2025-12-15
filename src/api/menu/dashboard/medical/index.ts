@@ -1,19 +1,21 @@
 import express from "express"
-import UssdMenu from "ussd-builder"
+import UssdMenu from "ussd-menu-builder"
 import _ from "lodash"
+
+import tulizo from "./tulizo";
 
 import { prisma } from "../../../../../lib/db";
 
 
-const medicalInstructions = `Choose medical product. \n1. Get Individual Tulizo Bora Insurance`
+const medicalInstructions = `Choose medical product. \n1. Tulizo Bora Medical Cover`
 
-const index = (menu: UssdMenu) => {
-    menu.state("medical", {
+const medical = (menu: UssdMenu) => {
+    menu.state("dashboard.medical", {
         run: async () => {
             menu.con(medicalInstructions)
         },
         next: {
-            "1": "tulizo",
+            "1": "medical.tulizo",
         },
         defaultNext: "invalidOption"
     });
@@ -24,13 +26,9 @@ const index = (menu: UssdMenu) => {
         }
     });
 
-    menu.state("tulizo", {
-        run: () => {
-           menu.end(`Select Your Desirable Limit. 1. IP limit 2. OP limit 3.Maternity limit`)
-        }
-    })
+    _.over([tulizo])(menu)
 
     return menu;
 }
 
-export default index;
+export default medical;

@@ -52,9 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   MedicalProduct: 'MedicalProduct',
-  ProductLimit: 'ProductLimit',
-  ProductRate: 'ProductRate',
-  Customer: 'Customer',
+  MedicalBenefits: 'MedicalBenefits',
+  MedicalCustomer: 'MedicalCustomer',
+  MedicalCustomerPolicy: 'MedicalCustomerPolicy',
   CustomerDependant: 'CustomerDependant'
 } as const
 
@@ -76,47 +76,43 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const MedicalProductScalarFieldEnum = {
   code: 'code',
-  name: 'name'
+  name: 'name',
+  medicalCustomerPolicyCode: 'medicalCustomerPolicyCode'
 } as const
 
 export type MedicalProductScalarFieldEnum = (typeof MedicalProductScalarFieldEnum)[keyof typeof MedicalProductScalarFieldEnum]
 
 
-export const ProductLimitScalarFieldEnum = {
+export const MedicalBenefitsScalarFieldEnum = {
   code: 'code',
   name: 'name',
-  limit: 'limit',
-  rate: 'rate',
-  active: 'active',
   medicalProductCode: 'medicalProductCode'
 } as const
 
-export type ProductLimitScalarFieldEnum = (typeof ProductLimitScalarFieldEnum)[keyof typeof ProductLimitScalarFieldEnum]
+export type MedicalBenefitsScalarFieldEnum = (typeof MedicalBenefitsScalarFieldEnum)[keyof typeof MedicalBenefitsScalarFieldEnum]
 
 
-export const ProductRateScalarFieldEnum = {
-  code: 'code',
-  productCode: 'productCode',
-  familySize: 'familySize',
-  sharing: 'sharing'
-} as const
-
-export type ProductRateScalarFieldEnum = (typeof ProductRateScalarFieldEnum)[keyof typeof ProductRateScalarFieldEnum]
-
-
-export const CustomerScalarFieldEnum = {
+export const MedicalCustomerScalarFieldEnum = {
   code: 'code',
   fullName: 'fullName',
+  dob: 'dob',
+  idNumber: 'idNumber',
   email: 'email',
   mobileNumber: 'mobileNumber',
-  idNumber: 'idNumber',
-  dob: 'dob',
-  famSize: 'famSize',
-  premium: 'premium',
-  productCode: 'productCode'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+export type MedicalCustomerScalarFieldEnum = (typeof MedicalCustomerScalarFieldEnum)[keyof typeof MedicalCustomerScalarFieldEnum]
+
+
+export const MedicalCustomerPolicyScalarFieldEnum = {
+  code: 'code',
+  customerCode: 'customerCode',
+  premium: 'premium'
+} as const
+
+export type MedicalCustomerPolicyScalarFieldEnum = (typeof MedicalCustomerPolicyScalarFieldEnum)[keyof typeof MedicalCustomerPolicyScalarFieldEnum]
 
 
 export const CustomerDependantScalarFieldEnum = {

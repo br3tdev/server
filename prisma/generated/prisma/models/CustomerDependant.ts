@@ -188,7 +188,7 @@ export type CustomerDependantGroupByOutputType = {
   fullName: string
   dob: string
   relationship: $Enums.Relationship
-  customerCode: number | null
+  customerCode: number
   _count: CustomerDependantCountAggregateOutputType | null
   _avg: CustomerDependantAvgAggregateOutputType | null
   _sum: CustomerDependantSumAggregateOutputType | null
@@ -219,8 +219,8 @@ export type CustomerDependantWhereInput = {
   fullName?: Prisma.StringFilter<"CustomerDependant"> | string
   dob?: Prisma.StringFilter<"CustomerDependant"> | string
   relationship?: Prisma.EnumRelationshipFilter<"CustomerDependant"> | $Enums.Relationship
-  customerCode?: Prisma.IntNullableFilter<"CustomerDependant"> | number | null
-  customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
+  customerCode?: Prisma.IntFilter<"CustomerDependant"> | number
+  customer?: Prisma.XOR<Prisma.MedicalCustomerScalarRelationFilter, Prisma.MedicalCustomerWhereInput>
 }
 
 export type CustomerDependantOrderByWithRelationInput = {
@@ -228,29 +228,29 @@ export type CustomerDependantOrderByWithRelationInput = {
   fullName?: Prisma.SortOrder
   dob?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
-  customerCode?: Prisma.SortOrderInput | Prisma.SortOrder
-  customer?: Prisma.CustomerOrderByWithRelationInput
+  customerCode?: Prisma.SortOrder
+  customer?: Prisma.MedicalCustomerOrderByWithRelationInput
 }
 
 export type CustomerDependantWhereUniqueInput = Prisma.AtLeast<{
   code?: number
-  customerCode_fullName_dob?: Prisma.CustomerDependantCustomerCodeFullNameDobCompoundUniqueInput
+  customerCode_fullName?: Prisma.CustomerDependantCustomerCodeFullNameCompoundUniqueInput
   AND?: Prisma.CustomerDependantWhereInput | Prisma.CustomerDependantWhereInput[]
   OR?: Prisma.CustomerDependantWhereInput[]
   NOT?: Prisma.CustomerDependantWhereInput | Prisma.CustomerDependantWhereInput[]
   fullName?: Prisma.StringFilter<"CustomerDependant"> | string
   dob?: Prisma.StringFilter<"CustomerDependant"> | string
   relationship?: Prisma.EnumRelationshipFilter<"CustomerDependant"> | $Enums.Relationship
-  customerCode?: Prisma.IntNullableFilter<"CustomerDependant"> | number | null
-  customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
-}, "code" | "customerCode_fullName_dob">
+  customerCode?: Prisma.IntFilter<"CustomerDependant"> | number
+  customer?: Prisma.XOR<Prisma.MedicalCustomerScalarRelationFilter, Prisma.MedicalCustomerWhereInput>
+}, "code" | "customerCode_fullName">
 
 export type CustomerDependantOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   dob?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
-  customerCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  customerCode?: Prisma.SortOrder
   _count?: Prisma.CustomerDependantCountOrderByAggregateInput
   _avg?: Prisma.CustomerDependantAvgOrderByAggregateInput
   _max?: Prisma.CustomerDependantMaxOrderByAggregateInput
@@ -266,14 +266,14 @@ export type CustomerDependantScalarWhereWithAggregatesInput = {
   fullName?: Prisma.StringWithAggregatesFilter<"CustomerDependant"> | string
   dob?: Prisma.StringWithAggregatesFilter<"CustomerDependant"> | string
   relationship?: Prisma.EnumRelationshipWithAggregatesFilter<"CustomerDependant"> | $Enums.Relationship
-  customerCode?: Prisma.IntNullableWithAggregatesFilter<"CustomerDependant"> | number | null
+  customerCode?: Prisma.IntWithAggregatesFilter<"CustomerDependant"> | number
 }
 
 export type CustomerDependantCreateInput = {
   fullName: string
   dob: string
   relationship: $Enums.Relationship
-  customer?: Prisma.CustomerCreateNestedOneWithoutDependantsInput
+  customer: Prisma.MedicalCustomerCreateNestedOneWithoutDependantsInput
 }
 
 export type CustomerDependantUncheckedCreateInput = {
@@ -281,14 +281,14 @@ export type CustomerDependantUncheckedCreateInput = {
   fullName: string
   dob: string
   relationship: $Enums.Relationship
-  customerCode?: number | null
+  customerCode: number
 }
 
 export type CustomerDependantUpdateInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.EnumRelationshipFieldUpdateOperationsInput | $Enums.Relationship
-  customer?: Prisma.CustomerUpdateOneWithoutDependantsNestedInput
+  customer?: Prisma.MedicalCustomerUpdateOneRequiredWithoutDependantsNestedInput
 }
 
 export type CustomerDependantUncheckedUpdateInput = {
@@ -296,7 +296,7 @@ export type CustomerDependantUncheckedUpdateInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.EnumRelationshipFieldUpdateOperationsInput | $Enums.Relationship
-  customerCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerCode?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type CustomerDependantCreateManyInput = {
@@ -304,7 +304,7 @@ export type CustomerDependantCreateManyInput = {
   fullName: string
   dob: string
   relationship: $Enums.Relationship
-  customerCode?: number | null
+  customerCode: number
 }
 
 export type CustomerDependantUpdateManyMutationInput = {
@@ -318,7 +318,7 @@ export type CustomerDependantUncheckedUpdateManyInput = {
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   dob?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.EnumRelationshipFieldUpdateOperationsInput | $Enums.Relationship
-  customerCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerCode?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type CustomerDependantListRelationFilter = {
@@ -331,10 +331,9 @@ export type CustomerDependantOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type CustomerDependantCustomerCodeFullNameDobCompoundUniqueInput = {
+export type CustomerDependantCustomerCodeFullNameCompoundUniqueInput = {
   customerCode: number
   fullName: string
-  dob: string
 }
 
 export type CustomerDependantCountOrderByAggregateInput = {
@@ -464,7 +463,7 @@ export type CustomerDependantScalarWhereInput = {
   fullName?: Prisma.StringFilter<"CustomerDependant"> | string
   dob?: Prisma.StringFilter<"CustomerDependant"> | string
   relationship?: Prisma.EnumRelationshipFilter<"CustomerDependant"> | $Enums.Relationship
-  customerCode?: Prisma.IntNullableFilter<"CustomerDependant"> | number | null
+  customerCode?: Prisma.IntFilter<"CustomerDependant"> | number
 }
 
 export type CustomerDependantCreateManyCustomerInput = {
@@ -502,7 +501,7 @@ export type CustomerDependantSelect<ExtArgs extends runtime.Types.Extensions.Int
   dob?: boolean
   relationship?: boolean
   customerCode?: boolean
-  customer?: boolean | Prisma.CustomerDependant$customerArgs<ExtArgs>
+  customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customerDependant"]>
 
 export type CustomerDependantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -511,7 +510,7 @@ export type CustomerDependantSelectCreateManyAndReturn<ExtArgs extends runtime.T
   dob?: boolean
   relationship?: boolean
   customerCode?: boolean
-  customer?: boolean | Prisma.CustomerDependant$customerArgs<ExtArgs>
+  customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customerDependant"]>
 
 export type CustomerDependantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -520,7 +519,7 @@ export type CustomerDependantSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   dob?: boolean
   relationship?: boolean
   customerCode?: boolean
-  customer?: boolean | Prisma.CustomerDependant$customerArgs<ExtArgs>
+  customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customerDependant"]>
 
 export type CustomerDependantSelectScalar = {
@@ -533,26 +532,26 @@ export type CustomerDependantSelectScalar = {
 
 export type CustomerDependantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "fullName" | "dob" | "relationship" | "customerCode", ExtArgs["result"]["customerDependant"]>
 export type CustomerDependantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  customer?: boolean | Prisma.CustomerDependant$customerArgs<ExtArgs>
+  customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }
 export type CustomerDependantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  customer?: boolean | Prisma.CustomerDependant$customerArgs<ExtArgs>
+  customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }
 export type CustomerDependantIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  customer?: boolean | Prisma.CustomerDependant$customerArgs<ExtArgs>
+  customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }
 
 export type $CustomerDependantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CustomerDependant"
   objects: {
-    customer: Prisma.$CustomerPayload<ExtArgs> | null
+    customer: Prisma.$MedicalCustomerPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     code: number
     fullName: string
     dob: string
     relationship: $Enums.Relationship
-    customerCode: number | null
+    customerCode: number
   }, ExtArgs["result"]["customerDependant"]>
   composites: {}
 }
@@ -947,7 +946,7 @@ readonly fields: CustomerDependantFieldRefs;
  */
 export interface Prisma__CustomerDependantClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  customer<T extends Prisma.CustomerDependant$customerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomerDependant$customerArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  customer<T extends Prisma.MedicalCustomerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MedicalCustomerDefaultArgs<ExtArgs>>): Prisma.Prisma__MedicalCustomerClient<runtime.Types.Result.GetResult<Prisma.$MedicalCustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1375,25 +1374,6 @@ export type CustomerDependantDeleteManyArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many CustomerDependants to delete.
    */
   limit?: number
-}
-
-/**
- * CustomerDependant.customer
- */
-export type CustomerDependant$customerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Customer
-   */
-  select?: Prisma.CustomerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Customer
-   */
-  omit?: Prisma.CustomerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CustomerInclude<ExtArgs> | null
-  where?: Prisma.CustomerWhereInput
 }
 
 /**

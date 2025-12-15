@@ -1,20 +1,20 @@
 import express from "express"
-import UssdMenu from "ussd-builder"
+import UssdMenu from "ussd-menu-builder"
 import _ from "lodash"
 
 import { prisma } from "../../../../../lib/db";
 
 
-const medicalInstructions = `Choose medical product. \n1. Get Individual Tulizo Bora Insurance`
+const motorCoverInstructions = `Choose medical product. \n1. Get Comprehensive Insurance`
 
-const index = (menu: UssdMenu) => {
-    menu.startState({
+const motor = (menu: UssdMenu) => {
+    menu.state("dashboard.motor", {
         run: async () => {
-            menu.con(medicalInstructions)
+            menu.con(motorCoverInstructions)
         },
         
         next: {
-            "1": "tulizo",
+            "1": "comp",
         },
         defaultNext: "invalidOption"
     });
@@ -25,13 +25,13 @@ const index = (menu: UssdMenu) => {
         }
     });
 
-    menu.state("tulizo", {
+    menu.state("comp", {
         run: () => {
-           menu.end("")
+           menu.end("Comprehensive cover user flow goes here")
         }
     })
 
     return menu;
 }
 
-export default index;
+export default motor;

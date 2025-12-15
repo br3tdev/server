@@ -23,20 +23,20 @@ export * from './enums';
  */
 export type MedicalProduct = Prisma.MedicalProductModel
 /**
- * Model ProductLimit
+ * Model MedicalBenefits
  * 
  */
-export type ProductLimit = Prisma.ProductLimitModel
+export type MedicalBenefits = Prisma.MedicalBenefitsModel
 /**
- * Model ProductRate
+ * Model MedicalCustomer
  * 
  */
-export type ProductRate = Prisma.ProductRateModel
+export type MedicalCustomer = Prisma.MedicalCustomerModel
 /**
- * Model Customer
+ * Model MedicalCustomerPolicy
  * 
  */
-export type Customer = Prisma.CustomerModel
+export type MedicalCustomerPolicy = Prisma.MedicalCustomerPolicyModel
 /**
  * Model CustomerDependant
  * 

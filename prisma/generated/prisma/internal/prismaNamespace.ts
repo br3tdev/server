@@ -385,9 +385,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   MedicalProduct: 'MedicalProduct',
-  ProductLimit: 'ProductLimit',
-  ProductRate: 'ProductRate',
-  Customer: 'Customer',
+  MedicalBenefits: 'MedicalBenefits',
+  MedicalCustomer: 'MedicalCustomer',
+  MedicalCustomerPolicy: 'MedicalCustomerPolicy',
   CustomerDependant: 'CustomerDependant'
 } as const
 
@@ -404,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "medicalProduct" | "productLimit" | "productRate" | "customer" | "customerDependant"
+    modelProps: "medicalProduct" | "medicalBenefits" | "medicalCustomer" | "medicalCustomerPolicy" | "customerDependant"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -482,225 +482,225 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ProductLimit: {
-      payload: Prisma.$ProductLimitPayload<ExtArgs>
-      fields: Prisma.ProductLimitFieldRefs
+    MedicalBenefits: {
+      payload: Prisma.$MedicalBenefitsPayload<ExtArgs>
+      fields: Prisma.MedicalBenefitsFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ProductLimitFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload> | null
+          args: Prisma.MedicalBenefitsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ProductLimitFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>
+          args: Prisma.MedicalBenefitsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>
         }
         findFirst: {
-          args: Prisma.ProductLimitFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload> | null
+          args: Prisma.MedicalBenefitsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ProductLimitFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>
+          args: Prisma.MedicalBenefitsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>
         }
         findMany: {
-          args: Prisma.ProductLimitFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>[]
+          args: Prisma.MedicalBenefitsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>[]
         }
         create: {
-          args: Prisma.ProductLimitCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>
+          args: Prisma.MedicalBenefitsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>
         }
         createMany: {
-          args: Prisma.ProductLimitCreateManyArgs<ExtArgs>
+          args: Prisma.MedicalBenefitsCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ProductLimitCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>[]
+          args: Prisma.MedicalBenefitsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>[]
         }
         delete: {
-          args: Prisma.ProductLimitDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>
+          args: Prisma.MedicalBenefitsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>
         }
         update: {
-          args: Prisma.ProductLimitUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>
+          args: Prisma.MedicalBenefitsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>
         }
         deleteMany: {
-          args: Prisma.ProductLimitDeleteManyArgs<ExtArgs>
+          args: Prisma.MedicalBenefitsDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ProductLimitUpdateManyArgs<ExtArgs>
+          args: Prisma.MedicalBenefitsUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ProductLimitUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>[]
+          args: Prisma.MedicalBenefitsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>[]
         }
         upsert: {
-          args: Prisma.ProductLimitUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductLimitPayload>
+          args: Prisma.MedicalBenefitsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalBenefitsPayload>
         }
         aggregate: {
-          args: Prisma.ProductLimitAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProductLimit>
+          args: Prisma.MedicalBenefitsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMedicalBenefits>
         }
         groupBy: {
-          args: Prisma.ProductLimitGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductLimitGroupByOutputType>[]
+          args: Prisma.MedicalBenefitsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MedicalBenefitsGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ProductLimitCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductLimitCountAggregateOutputType> | number
+          args: Prisma.MedicalBenefitsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MedicalBenefitsCountAggregateOutputType> | number
         }
       }
     }
-    ProductRate: {
-      payload: Prisma.$ProductRatePayload<ExtArgs>
-      fields: Prisma.ProductRateFieldRefs
+    MedicalCustomer: {
+      payload: Prisma.$MedicalCustomerPayload<ExtArgs>
+      fields: Prisma.MedicalCustomerFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ProductRateFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload> | null
+          args: Prisma.MedicalCustomerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ProductRateFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>
+          args: Prisma.MedicalCustomerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>
         }
         findFirst: {
-          args: Prisma.ProductRateFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload> | null
+          args: Prisma.MedicalCustomerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ProductRateFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>
+          args: Prisma.MedicalCustomerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>
         }
         findMany: {
-          args: Prisma.ProductRateFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>[]
+          args: Prisma.MedicalCustomerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>[]
         }
         create: {
-          args: Prisma.ProductRateCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>
+          args: Prisma.MedicalCustomerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>
         }
         createMany: {
-          args: Prisma.ProductRateCreateManyArgs<ExtArgs>
+          args: Prisma.MedicalCustomerCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ProductRateCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>[]
+          args: Prisma.MedicalCustomerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>[]
         }
         delete: {
-          args: Prisma.ProductRateDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>
+          args: Prisma.MedicalCustomerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>
         }
         update: {
-          args: Prisma.ProductRateUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>
+          args: Prisma.MedicalCustomerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>
         }
         deleteMany: {
-          args: Prisma.ProductRateDeleteManyArgs<ExtArgs>
+          args: Prisma.MedicalCustomerDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ProductRateUpdateManyArgs<ExtArgs>
+          args: Prisma.MedicalCustomerUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ProductRateUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>[]
+          args: Prisma.MedicalCustomerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>[]
         }
         upsert: {
-          args: Prisma.ProductRateUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductRatePayload>
+          args: Prisma.MedicalCustomerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPayload>
         }
         aggregate: {
-          args: Prisma.ProductRateAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProductRate>
+          args: Prisma.MedicalCustomerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMedicalCustomer>
         }
         groupBy: {
-          args: Prisma.ProductRateGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductRateGroupByOutputType>[]
+          args: Prisma.MedicalCustomerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MedicalCustomerGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ProductRateCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductRateCountAggregateOutputType> | number
+          args: Prisma.MedicalCustomerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MedicalCustomerCountAggregateOutputType> | number
         }
       }
     }
-    Customer: {
-      payload: Prisma.$CustomerPayload<ExtArgs>
-      fields: Prisma.CustomerFieldRefs
+    MedicalCustomerPolicy: {
+      payload: Prisma.$MedicalCustomerPolicyPayload<ExtArgs>
+      fields: Prisma.MedicalCustomerPolicyFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.CustomerFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload> | null
+          args: Prisma.MedicalCustomerPolicyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.CustomerFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>
+          args: Prisma.MedicalCustomerPolicyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>
         }
         findFirst: {
-          args: Prisma.CustomerFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload> | null
+          args: Prisma.MedicalCustomerPolicyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.CustomerFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>
+          args: Prisma.MedicalCustomerPolicyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>
         }
         findMany: {
-          args: Prisma.CustomerFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>[]
+          args: Prisma.MedicalCustomerPolicyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>[]
         }
         create: {
-          args: Prisma.CustomerCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>
+          args: Prisma.MedicalCustomerPolicyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>
         }
         createMany: {
-          args: Prisma.CustomerCreateManyArgs<ExtArgs>
+          args: Prisma.MedicalCustomerPolicyCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.CustomerCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>[]
+          args: Prisma.MedicalCustomerPolicyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>[]
         }
         delete: {
-          args: Prisma.CustomerDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>
+          args: Prisma.MedicalCustomerPolicyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>
         }
         update: {
-          args: Prisma.CustomerUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>
+          args: Prisma.MedicalCustomerPolicyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>
         }
         deleteMany: {
-          args: Prisma.CustomerDeleteManyArgs<ExtArgs>
+          args: Prisma.MedicalCustomerPolicyDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.CustomerUpdateManyArgs<ExtArgs>
+          args: Prisma.MedicalCustomerPolicyUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.CustomerUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>[]
+          args: Prisma.MedicalCustomerPolicyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>[]
         }
         upsert: {
-          args: Prisma.CustomerUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CustomerPayload>
+          args: Prisma.MedicalCustomerPolicyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MedicalCustomerPolicyPayload>
         }
         aggregate: {
-          args: Prisma.CustomerAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomer>
+          args: Prisma.MedicalCustomerPolicyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMedicalCustomerPolicy>
         }
         groupBy: {
-          args: Prisma.CustomerGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CustomerGroupByOutputType>[]
+          args: Prisma.MedicalCustomerPolicyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MedicalCustomerPolicyGroupByOutputType>[]
         }
         count: {
-          args: Prisma.CustomerCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CustomerCountAggregateOutputType> | number
+          args: Prisma.MedicalCustomerPolicyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MedicalCustomerPolicyCountAggregateOutputType> | number
         }
       }
     }
@@ -819,47 +819,43 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const MedicalProductScalarFieldEnum = {
   code: 'code',
-  name: 'name'
+  name: 'name',
+  medicalCustomerPolicyCode: 'medicalCustomerPolicyCode'
 } as const
 
 export type MedicalProductScalarFieldEnum = (typeof MedicalProductScalarFieldEnum)[keyof typeof MedicalProductScalarFieldEnum]
 
 
-export const ProductLimitScalarFieldEnum = {
+export const MedicalBenefitsScalarFieldEnum = {
   code: 'code',
   name: 'name',
-  limit: 'limit',
-  rate: 'rate',
-  active: 'active',
   medicalProductCode: 'medicalProductCode'
 } as const
 
-export type ProductLimitScalarFieldEnum = (typeof ProductLimitScalarFieldEnum)[keyof typeof ProductLimitScalarFieldEnum]
+export type MedicalBenefitsScalarFieldEnum = (typeof MedicalBenefitsScalarFieldEnum)[keyof typeof MedicalBenefitsScalarFieldEnum]
 
 
-export const ProductRateScalarFieldEnum = {
-  code: 'code',
-  productCode: 'productCode',
-  familySize: 'familySize',
-  sharing: 'sharing'
-} as const
-
-export type ProductRateScalarFieldEnum = (typeof ProductRateScalarFieldEnum)[keyof typeof ProductRateScalarFieldEnum]
-
-
-export const CustomerScalarFieldEnum = {
+export const MedicalCustomerScalarFieldEnum = {
   code: 'code',
   fullName: 'fullName',
+  dob: 'dob',
+  idNumber: 'idNumber',
   email: 'email',
   mobileNumber: 'mobileNumber',
-  idNumber: 'idNumber',
-  dob: 'dob',
-  famSize: 'famSize',
-  premium: 'premium',
-  productCode: 'productCode'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+export type MedicalCustomerScalarFieldEnum = (typeof MedicalCustomerScalarFieldEnum)[keyof typeof MedicalCustomerScalarFieldEnum]
+
+
+export const MedicalCustomerPolicyScalarFieldEnum = {
+  code: 'code',
+  customerCode: 'customerCode',
+  premium: 'premium'
+} as const
+
+export type MedicalCustomerPolicyScalarFieldEnum = (typeof MedicalCustomerPolicyScalarFieldEnum)[keyof typeof MedicalCustomerPolicyScalarFieldEnum]
 
 
 export const CustomerDependantScalarFieldEnum = {
@@ -932,37 +928,30 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Boolean'
+ * Reference to a field of type 'DateTime'
  */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
 /**
- * Reference to a field of type 'Sharing'
+ * Reference to a field of type 'DateTime[]'
  */
-export type EnumSharingFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sharing'>
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
 /**
- * Reference to a field of type 'Sharing[]'
+ * Reference to a field of type 'Decimal'
  */
-export type ListEnumSharingFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Sharing[]'>
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'Decimal[]'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -977,6 +966,20 @@ export type EnumRelationshipFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'Relationship[]'
  */
 export type ListEnumRelationshipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Relationship[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1075,9 +1078,9 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   medicalProduct?: Prisma.MedicalProductOmit
-  productLimit?: Prisma.ProductLimitOmit
-  productRate?: Prisma.ProductRateOmit
-  customer?: Prisma.CustomerOmit
+  medicalBenefits?: Prisma.MedicalBenefitsOmit
+  medicalCustomer?: Prisma.MedicalCustomerOmit
+  medicalCustomerPolicy?: Prisma.MedicalCustomerPolicyOmit
   customerDependant?: Prisma.CustomerDependantOmit
 }
 
