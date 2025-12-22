@@ -1,6 +1,6 @@
 import UssdMenu from "ussd-menu-builder"
-import { prisma } from "#lib/db";
-import MedicalService from "#services/medical.service";
+import { prisma } from "../../../../../lib/db";
+import MedicalService from "../../../../../services/medical.service";
 import { formatPlanOptions } from "#utils/common";
 
 const VALIDATION_PATTERNS = {

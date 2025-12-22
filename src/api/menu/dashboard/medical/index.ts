@@ -4,7 +4,7 @@ import _ from "lodash"
 
 import tulizo from "./tulizo";
 
-import { prisma } from "#lib/db";
+import { prisma } from "../../../../../lib/db";
 
 
 const medicalInstructions = `Choose medical product. \n1. Tulizo Bora Medical Cover`
