@@ -11,10 +11,10 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@lib/*": ["./lib/*"],
-      "@services/*": ["./services/*"],
-      "@utils/*": ["./utils/*"]
+      "#lib/*": ["./lib/*"],
+      "#services/*": ["./services/*"],
+      "#utils/*": ["./utils/*"],
+      "#src/*": ["./src/*"]
     }
   },
   "include": [

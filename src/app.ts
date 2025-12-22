@@ -5,7 +5,7 @@ import morgan from "morgan";
 
 import type MessageResponse from "./interfaces/message-response.js";
 
-import { prisma } from "../lib/db";
+import { prisma } from "#lib/db";
 import api from "./api/index.js";
 import * as middlewares from "./middlewares.js";
 

@@ -1,5 +1,5 @@
 import UssdMenu from "ussd-menu-builder"
-import { prisma } from "../../../../../lib/db";
+import { prisma } from "#lib/db";
 
 const VALIDATION_PATTERNS = {
   dob: "*\\d{2}/\\d{2}/\\d{4}",
