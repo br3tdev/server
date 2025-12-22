@@ -37,6 +37,7 @@ const tulizoFamily = (menu: UssdMenu) => {
     // Family plan
     menu.state("tulizo.family", {
         run: async () => {
+            // ! TODO: Pull benefits from database
             menu.con(`Select preferred benefits:\n1. IP 1M, OP 500K, Mat 250K\n2. IP 2M, OP 700K, Mat 550K\n3. IP 3M, OP 500K\n99. Go back`)
         },
         next: {
@@ -224,87 +225,3 @@ const tulizoFamily = (menu: UssdMenu) => {
 }
 
 export default tulizoFamily;
-
-
-// Dependant management
-// class DependantManager {
-//   private menu: UssdMenu;
-//   private currentDependant: number = 1;
-//   private totalDependants: number = 0;
-//   private basePlan: string = "";
-
-//   constructor(menu: UssdMenu) {
-//     this.menu = menu;
-//   }
-
-//   setTotalDependants(total: number) {
-//     this.totalDependants = total;
-//     this.currentDependant = 1;
-//   }
-
-//   setBasePlan(plan: string) {
-//     this.basePlan = plan;
-//   }
-
-//   hasMoreDependants(): boolean {
-//     return this.currentDependant <= this.totalDependants;
-//   }
-
-//   nextDependant() {
-//     this.currentDependant++;
-//   }
-
-//   getCurrentDependant(): number {
-//     return this.currentDependant;
-//   }
-
-//   createDependantStates() {
-//     // Dependant DOB state
-//     this.menu.state(`${this.basePlan}.dependant.dob`, {
-//       run: () => {
-//         //Error here
-//         menu.con(`Enter Dependant ${this.currentDependant}'s DOB: (dd/mm/yyyy)`);
-//       },
-//       next: {
-//         [VALIDATION_PATTERNS.dob]: `${this.basePlan}.dependant.fullName`
-//       },
-//       defaultNext: "invalidOption"
-//     });
-
-//     // Dependant Full Name state
-//     this.menu.state(`${this.basePlan}.dependant.fullName`, {
-//       run: () => {
-//         // Error here
-//         menu.con(`Enter Dependant ${this.currentDependant}'s Full Name:`);
-//       },
-//       next: {
-//         [VALIDATION_PATTERNS.name]: `${this.basePlan}.dependant.relationship`
-//       },
-//       defaultNext: "invalidOption"
-//     });
-
-//     // Dependant Relationship state
-//     this.menu.state(`${this.basePlan}.dependant.relationship`, {
-//       run: () => {
-//         // Error here
-//         menu.con(`Enter relationship with dependant ${this.currentDependant}:\n1. Spouse\n2. Child`);
-//       },
-//       next: {
-//         [VALIDATION_PATTERNS.relationship]: `${this.basePlan}.dependant.next`
-//       },
-//       defaultNext: "invalidOption"
-//     });
-
-//     // Next dependant or proceed
-//     this.menu.state(`${this.basePlan}.dependant.next`, {
-//       run: () => {
-//         if (this.hasMoreDependants()) {
-//           this.nextDependant();
-//           this.menu.go(`${this.basePlan}.dependant.dob`);
-//         } else {
-//           this.menu.go(`${this.basePlan}.email`);
-//         }
-//       }
-//     });
-//   }
-// }

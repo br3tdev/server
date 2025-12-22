@@ -52,4 +52,14 @@ const commonStates = {
   }
 };
 
-export { commonStates };
+const formatPlanOptions = (options: {
+    code: number;
+    name: string;
+    medicalProductCode: number;
+}[]): string => {
+  let message = options.map(opt => opt.name).join("\n");
+
+  return message;
+}
+
+export { commonStates, formatPlanOptions };

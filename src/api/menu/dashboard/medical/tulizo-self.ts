@@ -1,5 +1,7 @@
 import UssdMenu from "ussd-menu-builder"
-import { prisma } from "../../../../../lib/db";
+import { prisma } from "@lib/db";
+import MedicalService from "@services/medical.service";
+import { formatPlanOptions } from "@utils/common";
 
 const VALIDATION_PATTERNS = {
   dob: "*\\d{2}/\\d{2}/\\d{4}",
@@ -57,10 +59,19 @@ const POLICY_OPTIONS: Record<string, PolicyOption> = {
 // Upgrade to Redis or other Storage Driver
 let session: { [sessionId: string]: CustomerKyc } = {};
 
+let initialMessage = `Select preferred benefits:\n1. IP 1M, OP 500K, Mat 250K\n2. IP 2M, OP 700K, Mat 550K\n99. Go back`
+
 const tulizoSelf = (menu: UssdMenu) => {
     menu.state("tulizo.self", {
         run: async () => {
-            menu.con(`Select preferred benefits:\n1. IP 1M, OP 500K, Mat 250K\n2. IP 2M, OP 700K, Mat 550K\n99. Go back`)
+            // ! TODO: Pull benefits from database
+            const benefits = await MedicalService.getMedicalProductBenefits();
+            if (benefits) {
+                let message = formatPlanOptions(benefits)
+                menu.con(message)
+            } else {
+                menu.end(`Service unavailable`)
+            }
         },
         next: {
             "1": "tulizo.self.base",

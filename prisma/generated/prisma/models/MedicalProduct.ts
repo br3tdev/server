@@ -28,60 +28,50 @@ export type AggregateMedicalProduct = {
 
 export type MedicalProductAvgAggregateOutputType = {
   code: number | null
-  medicalCustomerPolicyCode: number | null
 }
 
 export type MedicalProductSumAggregateOutputType = {
   code: number | null
-  medicalCustomerPolicyCode: number | null
 }
 
 export type MedicalProductMinAggregateOutputType = {
   code: number | null
   name: string | null
-  medicalCustomerPolicyCode: number | null
 }
 
 export type MedicalProductMaxAggregateOutputType = {
   code: number | null
   name: string | null
-  medicalCustomerPolicyCode: number | null
 }
 
 export type MedicalProductCountAggregateOutputType = {
   code: number
   name: number
-  medicalCustomerPolicyCode: number
   _all: number
 }
 
 
 export type MedicalProductAvgAggregateInputType = {
   code?: true
-  medicalCustomerPolicyCode?: true
 }
 
 export type MedicalProductSumAggregateInputType = {
   code?: true
-  medicalCustomerPolicyCode?: true
 }
 
 export type MedicalProductMinAggregateInputType = {
   code?: true
   name?: true
-  medicalCustomerPolicyCode?: true
 }
 
 export type MedicalProductMaxAggregateInputType = {
   code?: true
   name?: true
-  medicalCustomerPolicyCode?: true
 }
 
 export type MedicalProductCountAggregateInputType = {
   code?: true
   name?: true
-  medicalCustomerPolicyCode?: true
   _all?: true
 }
 
@@ -174,7 +164,6 @@ export type MedicalProductGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type MedicalProductGroupByOutputType = {
   code: number
   name: string
-  medicalCustomerPolicyCode: number | null
   _count: MedicalProductCountAggregateOutputType | null
   _avg: MedicalProductAvgAggregateOutputType | null
   _sum: MedicalProductSumAggregateOutputType | null
@@ -203,17 +192,15 @@ export type MedicalProductWhereInput = {
   NOT?: Prisma.MedicalProductWhereInput | Prisma.MedicalProductWhereInput[]
   code?: Prisma.IntFilter<"MedicalProduct"> | number
   name?: Prisma.StringFilter<"MedicalProduct"> | string
-  medicalCustomerPolicyCode?: Prisma.IntNullableFilter<"MedicalProduct"> | number | null
   benefits?: Prisma.MedicalBenefitsListRelationFilter
-  MedicalCustomerPolicy?: Prisma.XOR<Prisma.MedicalCustomerPolicyNullableScalarRelationFilter, Prisma.MedicalCustomerPolicyWhereInput> | null
+  policies?: Prisma.MedicalCustomerPolicyListRelationFilter
 }
 
 export type MedicalProductOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrderInput | Prisma.SortOrder
   benefits?: Prisma.MedicalBenefitsOrderByRelationAggregateInput
-  MedicalCustomerPolicy?: Prisma.MedicalCustomerPolicyOrderByWithRelationInput
+  policies?: Prisma.MedicalCustomerPolicyOrderByRelationAggregateInput
 }
 
 export type MedicalProductWhereUniqueInput = Prisma.AtLeast<{
@@ -222,15 +209,13 @@ export type MedicalProductWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MedicalProductWhereInput | Prisma.MedicalProductWhereInput[]
   OR?: Prisma.MedicalProductWhereInput[]
   NOT?: Prisma.MedicalProductWhereInput | Prisma.MedicalProductWhereInput[]
-  medicalCustomerPolicyCode?: Prisma.IntNullableFilter<"MedicalProduct"> | number | null
   benefits?: Prisma.MedicalBenefitsListRelationFilter
-  MedicalCustomerPolicy?: Prisma.XOR<Prisma.MedicalCustomerPolicyNullableScalarRelationFilter, Prisma.MedicalCustomerPolicyWhereInput> | null
+  policies?: Prisma.MedicalCustomerPolicyListRelationFilter
 }, "code" | "name">
 
 export type MedicalProductOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MedicalProductCountOrderByAggregateInput
   _avg?: Prisma.MedicalProductAvgOrderByAggregateInput
   _max?: Prisma.MedicalProductMaxOrderByAggregateInput
@@ -244,39 +229,37 @@ export type MedicalProductScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MedicalProductScalarWhereWithAggregatesInput | Prisma.MedicalProductScalarWhereWithAggregatesInput[]
   code?: Prisma.IntWithAggregatesFilter<"MedicalProduct"> | number
   name?: Prisma.StringWithAggregatesFilter<"MedicalProduct"> | string
-  medicalCustomerPolicyCode?: Prisma.IntNullableWithAggregatesFilter<"MedicalProduct"> | number | null
 }
 
 export type MedicalProductCreateInput = {
   name: string
   benefits?: Prisma.MedicalBenefitsCreateNestedManyWithoutMedicalProductInput
-  MedicalCustomerPolicy?: Prisma.MedicalCustomerPolicyCreateNestedOneWithoutProductsInput
+  policies?: Prisma.MedicalCustomerPolicyCreateNestedManyWithoutProductsInput
 }
 
 export type MedicalProductUncheckedCreateInput = {
   code?: number
   name: string
-  medicalCustomerPolicyCode?: number | null
   benefits?: Prisma.MedicalBenefitsUncheckedCreateNestedManyWithoutMedicalProductInput
+  policies?: Prisma.MedicalCustomerPolicyUncheckedCreateNestedManyWithoutProductsInput
 }
 
 export type MedicalProductUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   benefits?: Prisma.MedicalBenefitsUpdateManyWithoutMedicalProductNestedInput
-  MedicalCustomerPolicy?: Prisma.MedicalCustomerPolicyUpdateOneWithoutProductsNestedInput
+  policies?: Prisma.MedicalCustomerPolicyUpdateManyWithoutProductsNestedInput
 }
 
 export type MedicalProductUncheckedUpdateInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  medicalCustomerPolicyCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   benefits?: Prisma.MedicalBenefitsUncheckedUpdateManyWithoutMedicalProductNestedInput
+  policies?: Prisma.MedicalCustomerPolicyUncheckedUpdateManyWithoutProductsNestedInput
 }
 
 export type MedicalProductCreateManyInput = {
   code?: number
   name: string
-  medicalCustomerPolicyCode?: number | null
 }
 
 export type MedicalProductUpdateManyMutationInput = {
@@ -286,35 +269,29 @@ export type MedicalProductUpdateManyMutationInput = {
 export type MedicalProductUncheckedUpdateManyInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  medicalCustomerPolicyCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MedicalProductCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrder
 }
 
 export type MedicalProductAvgOrderByAggregateInput = {
   code?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrder
 }
 
 export type MedicalProductMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrder
 }
 
 export type MedicalProductMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrder
 }
 
 export type MedicalProductSumOrderByAggregateInput = {
   code?: Prisma.SortOrder
-  medicalCustomerPolicyCode?: Prisma.SortOrder
 }
 
 export type MedicalProductScalarRelationFilter = {
@@ -344,14 +321,6 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type MedicalProductCreateNestedOneWithoutBenefitsInput = {
   create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutBenefitsInput, Prisma.MedicalProductUncheckedCreateWithoutBenefitsInput>
   connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutBenefitsInput
@@ -366,57 +335,53 @@ export type MedicalProductUpdateOneRequiredWithoutBenefitsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MedicalProductUpdateToOneWithWhereWithoutBenefitsInput, Prisma.MedicalProductUpdateWithoutBenefitsInput>, Prisma.MedicalProductUncheckedUpdateWithoutBenefitsInput>
 }
 
-export type MedicalProductCreateNestedManyWithoutMedicalCustomerPolicyInput = {
-  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput> | Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput[] | Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput[]
-  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput[]
-  createMany?: Prisma.MedicalProductCreateManyMedicalCustomerPolicyInputEnvelope
+export type MedicalProductCreateNestedManyWithoutPoliciesInput = {
+  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutPoliciesInput, Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput> | Prisma.MedicalProductCreateWithoutPoliciesInput[] | Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput[]
+  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput | Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput[]
   connect?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
 }
 
-export type MedicalProductUncheckedCreateNestedManyWithoutMedicalCustomerPolicyInput = {
-  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput> | Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput[] | Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput[]
-  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput[]
-  createMany?: Prisma.MedicalProductCreateManyMedicalCustomerPolicyInputEnvelope
+export type MedicalProductUncheckedCreateNestedManyWithoutPoliciesInput = {
+  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutPoliciesInput, Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput> | Prisma.MedicalProductCreateWithoutPoliciesInput[] | Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput[]
+  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput | Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput[]
   connect?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
 }
 
-export type MedicalProductUpdateManyWithoutMedicalCustomerPolicyNestedInput = {
-  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput> | Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput[] | Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput[]
-  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput[]
-  upsert?: Prisma.MedicalProductUpsertWithWhereUniqueWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductUpsertWithWhereUniqueWithoutMedicalCustomerPolicyInput[]
-  createMany?: Prisma.MedicalProductCreateManyMedicalCustomerPolicyInputEnvelope
+export type MedicalProductUpdateManyWithoutPoliciesNestedInput = {
+  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutPoliciesInput, Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput> | Prisma.MedicalProductCreateWithoutPoliciesInput[] | Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput[]
+  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput | Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput[]
+  upsert?: Prisma.MedicalProductUpsertWithWhereUniqueWithoutPoliciesInput | Prisma.MedicalProductUpsertWithWhereUniqueWithoutPoliciesInput[]
   set?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
   disconnect?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
   delete?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
   connect?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
-  update?: Prisma.MedicalProductUpdateWithWhereUniqueWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductUpdateWithWhereUniqueWithoutMedicalCustomerPolicyInput[]
-  updateMany?: Prisma.MedicalProductUpdateManyWithWhereWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductUpdateManyWithWhereWithoutMedicalCustomerPolicyInput[]
+  update?: Prisma.MedicalProductUpdateWithWhereUniqueWithoutPoliciesInput | Prisma.MedicalProductUpdateWithWhereUniqueWithoutPoliciesInput[]
+  updateMany?: Prisma.MedicalProductUpdateManyWithWhereWithoutPoliciesInput | Prisma.MedicalProductUpdateManyWithWhereWithoutPoliciesInput[]
   deleteMany?: Prisma.MedicalProductScalarWhereInput | Prisma.MedicalProductScalarWhereInput[]
 }
 
-export type MedicalProductUncheckedUpdateManyWithoutMedicalCustomerPolicyNestedInput = {
-  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput> | Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput[] | Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput[]
-  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput[]
-  upsert?: Prisma.MedicalProductUpsertWithWhereUniqueWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductUpsertWithWhereUniqueWithoutMedicalCustomerPolicyInput[]
-  createMany?: Prisma.MedicalProductCreateManyMedicalCustomerPolicyInputEnvelope
+export type MedicalProductUncheckedUpdateManyWithoutPoliciesNestedInput = {
+  create?: Prisma.XOR<Prisma.MedicalProductCreateWithoutPoliciesInput, Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput> | Prisma.MedicalProductCreateWithoutPoliciesInput[] | Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput[]
+  connectOrCreate?: Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput | Prisma.MedicalProductCreateOrConnectWithoutPoliciesInput[]
+  upsert?: Prisma.MedicalProductUpsertWithWhereUniqueWithoutPoliciesInput | Prisma.MedicalProductUpsertWithWhereUniqueWithoutPoliciesInput[]
   set?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
   disconnect?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
   delete?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
   connect?: Prisma.MedicalProductWhereUniqueInput | Prisma.MedicalProductWhereUniqueInput[]
-  update?: Prisma.MedicalProductUpdateWithWhereUniqueWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductUpdateWithWhereUniqueWithoutMedicalCustomerPolicyInput[]
-  updateMany?: Prisma.MedicalProductUpdateManyWithWhereWithoutMedicalCustomerPolicyInput | Prisma.MedicalProductUpdateManyWithWhereWithoutMedicalCustomerPolicyInput[]
+  update?: Prisma.MedicalProductUpdateWithWhereUniqueWithoutPoliciesInput | Prisma.MedicalProductUpdateWithWhereUniqueWithoutPoliciesInput[]
+  updateMany?: Prisma.MedicalProductUpdateManyWithWhereWithoutPoliciesInput | Prisma.MedicalProductUpdateManyWithWhereWithoutPoliciesInput[]
   deleteMany?: Prisma.MedicalProductScalarWhereInput | Prisma.MedicalProductScalarWhereInput[]
 }
 
 export type MedicalProductCreateWithoutBenefitsInput = {
   name: string
-  MedicalCustomerPolicy?: Prisma.MedicalCustomerPolicyCreateNestedOneWithoutProductsInput
+  policies?: Prisma.MedicalCustomerPolicyCreateNestedManyWithoutProductsInput
 }
 
 export type MedicalProductUncheckedCreateWithoutBenefitsInput = {
   code?: number
   name: string
-  medicalCustomerPolicyCode?: number | null
+  policies?: Prisma.MedicalCustomerPolicyUncheckedCreateNestedManyWithoutProductsInput
 }
 
 export type MedicalProductCreateOrConnectWithoutBenefitsInput = {
@@ -437,50 +402,45 @@ export type MedicalProductUpdateToOneWithWhereWithoutBenefitsInput = {
 
 export type MedicalProductUpdateWithoutBenefitsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  MedicalCustomerPolicy?: Prisma.MedicalCustomerPolicyUpdateOneWithoutProductsNestedInput
+  policies?: Prisma.MedicalCustomerPolicyUpdateManyWithoutProductsNestedInput
 }
 
 export type MedicalProductUncheckedUpdateWithoutBenefitsInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  medicalCustomerPolicyCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  policies?: Prisma.MedicalCustomerPolicyUncheckedUpdateManyWithoutProductsNestedInput
 }
 
-export type MedicalProductCreateWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductCreateWithoutPoliciesInput = {
   name: string
   benefits?: Prisma.MedicalBenefitsCreateNestedManyWithoutMedicalProductInput
 }
 
-export type MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUncheckedCreateWithoutPoliciesInput = {
   code?: number
   name: string
   benefits?: Prisma.MedicalBenefitsUncheckedCreateNestedManyWithoutMedicalProductInput
 }
 
-export type MedicalProductCreateOrConnectWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductCreateOrConnectWithoutPoliciesInput = {
   where: Prisma.MedicalProductWhereUniqueInput
-  create: Prisma.XOR<Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput>
+  create: Prisma.XOR<Prisma.MedicalProductCreateWithoutPoliciesInput, Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput>
 }
 
-export type MedicalProductCreateManyMedicalCustomerPolicyInputEnvelope = {
-  data: Prisma.MedicalProductCreateManyMedicalCustomerPolicyInput | Prisma.MedicalProductCreateManyMedicalCustomerPolicyInput[]
-  skipDuplicates?: boolean
-}
-
-export type MedicalProductUpsertWithWhereUniqueWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUpsertWithWhereUniqueWithoutPoliciesInput = {
   where: Prisma.MedicalProductWhereUniqueInput
-  update: Prisma.XOR<Prisma.MedicalProductUpdateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedUpdateWithoutMedicalCustomerPolicyInput>
-  create: Prisma.XOR<Prisma.MedicalProductCreateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedCreateWithoutMedicalCustomerPolicyInput>
+  update: Prisma.XOR<Prisma.MedicalProductUpdateWithoutPoliciesInput, Prisma.MedicalProductUncheckedUpdateWithoutPoliciesInput>
+  create: Prisma.XOR<Prisma.MedicalProductCreateWithoutPoliciesInput, Prisma.MedicalProductUncheckedCreateWithoutPoliciesInput>
 }
 
-export type MedicalProductUpdateWithWhereUniqueWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUpdateWithWhereUniqueWithoutPoliciesInput = {
   where: Prisma.MedicalProductWhereUniqueInput
-  data: Prisma.XOR<Prisma.MedicalProductUpdateWithoutMedicalCustomerPolicyInput, Prisma.MedicalProductUncheckedUpdateWithoutMedicalCustomerPolicyInput>
+  data: Prisma.XOR<Prisma.MedicalProductUpdateWithoutPoliciesInput, Prisma.MedicalProductUncheckedUpdateWithoutPoliciesInput>
 }
 
-export type MedicalProductUpdateManyWithWhereWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUpdateManyWithWhereWithoutPoliciesInput = {
   where: Prisma.MedicalProductScalarWhereInput
-  data: Prisma.XOR<Prisma.MedicalProductUpdateManyMutationInput, Prisma.MedicalProductUncheckedUpdateManyWithoutMedicalCustomerPolicyInput>
+  data: Prisma.XOR<Prisma.MedicalProductUpdateManyMutationInput, Prisma.MedicalProductUncheckedUpdateManyWithoutPoliciesInput>
 }
 
 export type MedicalProductScalarWhereInput = {
@@ -489,26 +449,20 @@ export type MedicalProductScalarWhereInput = {
   NOT?: Prisma.MedicalProductScalarWhereInput | Prisma.MedicalProductScalarWhereInput[]
   code?: Prisma.IntFilter<"MedicalProduct"> | number
   name?: Prisma.StringFilter<"MedicalProduct"> | string
-  medicalCustomerPolicyCode?: Prisma.IntNullableFilter<"MedicalProduct"> | number | null
 }
 
-export type MedicalProductCreateManyMedicalCustomerPolicyInput = {
-  code?: number
-  name: string
-}
-
-export type MedicalProductUpdateWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUpdateWithoutPoliciesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   benefits?: Prisma.MedicalBenefitsUpdateManyWithoutMedicalProductNestedInput
 }
 
-export type MedicalProductUncheckedUpdateWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUncheckedUpdateWithoutPoliciesInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   benefits?: Prisma.MedicalBenefitsUncheckedUpdateManyWithoutMedicalProductNestedInput
 }
 
-export type MedicalProductUncheckedUpdateManyWithoutMedicalCustomerPolicyInput = {
+export type MedicalProductUncheckedUpdateManyWithoutPoliciesInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -520,10 +474,12 @@ export type MedicalProductUncheckedUpdateManyWithoutMedicalCustomerPolicyInput =
 
 export type MedicalProductCountOutputType = {
   benefits: number
+  policies: number
 }
 
 export type MedicalProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   benefits?: boolean | MedicalProductCountOutputTypeCountBenefitsArgs
+  policies?: boolean | MedicalProductCountOutputTypeCountPoliciesArgs
 }
 
 /**
@@ -543,59 +499,55 @@ export type MedicalProductCountOutputTypeCountBenefitsArgs<ExtArgs extends runti
   where?: Prisma.MedicalBenefitsWhereInput
 }
 
+/**
+ * MedicalProductCountOutputType without action
+ */
+export type MedicalProductCountOutputTypeCountPoliciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MedicalCustomerPolicyWhereInput
+}
+
 
 export type MedicalProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   name?: boolean
-  medicalCustomerPolicyCode?: boolean
   benefits?: boolean | Prisma.MedicalProduct$benefitsArgs<ExtArgs>
-  MedicalCustomerPolicy?: boolean | Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>
+  policies?: boolean | Prisma.MedicalProduct$policiesArgs<ExtArgs>
   _count?: boolean | Prisma.MedicalProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["medicalProduct"]>
 
 export type MedicalProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   name?: boolean
-  medicalCustomerPolicyCode?: boolean
-  MedicalCustomerPolicy?: boolean | Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>
 }, ExtArgs["result"]["medicalProduct"]>
 
 export type MedicalProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   name?: boolean
-  medicalCustomerPolicyCode?: boolean
-  MedicalCustomerPolicy?: boolean | Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>
 }, ExtArgs["result"]["medicalProduct"]>
 
 export type MedicalProductSelectScalar = {
   code?: boolean
   name?: boolean
-  medicalCustomerPolicyCode?: boolean
 }
 
-export type MedicalProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "name" | "medicalCustomerPolicyCode", ExtArgs["result"]["medicalProduct"]>
+export type MedicalProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "name", ExtArgs["result"]["medicalProduct"]>
 export type MedicalProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   benefits?: boolean | Prisma.MedicalProduct$benefitsArgs<ExtArgs>
-  MedicalCustomerPolicy?: boolean | Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>
+  policies?: boolean | Prisma.MedicalProduct$policiesArgs<ExtArgs>
   _count?: boolean | Prisma.MedicalProductCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type MedicalProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  MedicalCustomerPolicy?: boolean | Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>
-}
-export type MedicalProductIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  MedicalCustomerPolicy?: boolean | Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>
-}
+export type MedicalProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type MedicalProductIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $MedicalProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MedicalProduct"
   objects: {
     benefits: Prisma.$MedicalBenefitsPayload<ExtArgs>[]
-    MedicalCustomerPolicy: Prisma.$MedicalCustomerPolicyPayload<ExtArgs> | null
+    policies: Prisma.$MedicalCustomerPolicyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     code: number
     name: string
-    medicalCustomerPolicyCode: number | null
   }, ExtArgs["result"]["medicalProduct"]>
   composites: {}
 }
@@ -991,7 +943,7 @@ readonly fields: MedicalProductFieldRefs;
 export interface Prisma__MedicalProductClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   benefits<T extends Prisma.MedicalProduct$benefitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MedicalProduct$benefitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MedicalBenefitsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  MedicalCustomerPolicy<T extends Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs>>): Prisma.Prisma__MedicalCustomerPolicyClient<runtime.Types.Result.GetResult<Prisma.$MedicalCustomerPolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  policies<T extends Prisma.MedicalProduct$policiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MedicalProduct$policiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MedicalCustomerPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1023,7 +975,6 @@ export interface Prisma__MedicalProductClient<T, Null = never, ExtArgs extends r
 export interface MedicalProductFieldRefs {
   readonly code: Prisma.FieldRef<"MedicalProduct", 'Int'>
   readonly name: Prisma.FieldRef<"MedicalProduct", 'String'>
-  readonly medicalCustomerPolicyCode: Prisma.FieldRef<"MedicalProduct", 'Int'>
 }
     
 
@@ -1273,10 +1224,6 @@ export type MedicalProductCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    */
   data: Prisma.MedicalProductCreateManyInput | Prisma.MedicalProductCreateManyInput[]
   skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MedicalProductIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1347,10 +1294,6 @@ export type MedicalProductUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * Limit how many MedicalProducts to update.
    */
   limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MedicalProductIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1444,9 +1387,9 @@ export type MedicalProduct$benefitsArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * MedicalProduct.MedicalCustomerPolicy
+ * MedicalProduct.policies
  */
-export type MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type MedicalProduct$policiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MedicalCustomerPolicy
    */
@@ -1460,6 +1403,11 @@ export type MedicalProduct$MedicalCustomerPolicyArgs<ExtArgs extends runtime.Typ
    */
   include?: Prisma.MedicalCustomerPolicyInclude<ExtArgs> | null
   where?: Prisma.MedicalCustomerPolicyWhereInput
+  orderBy?: Prisma.MedicalCustomerPolicyOrderByWithRelationInput | Prisma.MedicalCustomerPolicyOrderByWithRelationInput[]
+  cursor?: Prisma.MedicalCustomerPolicyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MedicalCustomerPolicyScalarFieldEnum | Prisma.MedicalCustomerPolicyScalarFieldEnum[]
 }
 
 /**

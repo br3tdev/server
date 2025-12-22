@@ -13,27 +13,31 @@ datasource db {
 }
 
 model MedicalProduct {
-  code                      Int                    @id @default(autoincrement())
-  name                      String                 @unique
-  benefits                  MedicalBenefits[]
-  MedicalCustomerPolicy     MedicalCustomerPolicy? @relation(fields: [medicalCustomerPolicyCode], references: [code])
-  medicalCustomerPolicyCode Int?
+  code        Int                    @id @default(autoincrement())
+  name        String                 @unique @db.VarChar(150)
+  benefits    MedicalBenefits[]
+  policies    MedicalCustomerPolicy[] @relation("PolicyProducts")
+  
+  @@map("medical_products")
 }
 
 model MedicalBenefits {
-  code                Int            @id @default(autoincrement())
-  name                String         @unique
-  medicalProduct      MedicalProduct @relation(fields: [medicalProductCode], references: [code])
-  medicalProductCode  Int
+  code               Int             @id @default(autoincrement())
+  name               String          @unique @db.VarChar(100)
+  medicalProduct     MedicalProduct  @relation(fields: [medicalProductCode], references: [code], onDelete: Cascade)
+  medicalProductCode Int
+  
+  @@index([medicalProductCode])
+  @@map("medical_benefits")
 }
 
 model MedicalCustomer {
   code         Int                     @id @default(autoincrement())
-  fullName     String
-  dob          String
-  idNumber     String
-  email        String
-  mobileNumber String
+  fullName     String                  @db.VarChar(200)
+  dob          String                  @db.VarChar(30)
+  idNumber     String                  @db.VarChar(50)
+  email        String                  @db.VarChar(255)
+  mobileNumber String                  @db.VarChar(20)
   dependants   CustomerDependant[]
   policies     MedicalCustomerPolicy[]
   createdAt    DateTime                @default(now())
@@ -42,33 +46,101 @@ model MedicalCustomer {
   @@unique([email])
   @@unique([idNumber])
   @@index([mobileNumber])
+  @@map("medical_customers")
 }
 
 model MedicalCustomerPolicy {
   code         Int              @id @default(autoincrement())
-  customer     MedicalCustomer  @relation(fields: [customerCode], references: [code])
+  customer     MedicalCustomer  @relation(fields: [customerCode], references: [code], onDelete: Cascade)
   customerCode Int
+  policyType   SharingType
   premium      Decimal          @db.Decimal(12, 2)
-  products     MedicalProduct[]
+  products     MedicalProduct[] @relation("PolicyProducts")
+  
+  @@index([customerCode])
+  @@map("medical_customer_policies")
 }
 
 model CustomerDependant {
   code         Int             @id @default(autoincrement())
-  fullName     String
-  dob          String
+  fullName     String          @db.VarChar(200)
+  dob          String          @db.VarChar(30)
   relationship Relationship
-  customer     MedicalCustomer @relation(fields: [customerCode], references: [code])
+  customer     MedicalCustomer @relation(fields: [customerCode], references: [code], onDelete: Cascade)
   customerCode Int
 
   @@unique([customerCode, fullName])
+  @@index([customerCode])
+  @@map("customer_dependants")
 }
 
-enum Sharing {
-  PF
-  PP
+enum SharingType {
+  PER_FAMILY   @map("PF")
+  PER_PERSON @map("PP")
 }
 
 enum Relationship {
   SPOUSE
   CHILD
 }
+
+// model MedicalProduct {
+//   code                      Int                    @id @default(autoincrement())
+//   name                      String                 @unique
+//   benefits                  MedicalBenefits[]
+//   MedicalCustomerPolicy     MedicalCustomerPolicy? @relation(fields: [medicalCustomerPolicyCode], references: [code])
+//   medicalCustomerPolicyCode Int?
+// }
+
+// model MedicalBenefits {
+//   code                Int            @id @default(autoincrement())
+//   name                String         @unique
+//   medicalProduct      MedicalProduct @relation(fields: [medicalProductCode], references: [code])
+//   medicalProductCode  Int
+// }
+
+// model MedicalCustomer {
+//   code         Int                     @id @default(autoincrement())
+//   fullName     String
+//   dob          String
+//   idNumber     String
+//   email        String
+//   mobileNumber String
+//   dependants   CustomerDependant[]
+//   policies     MedicalCustomerPolicy[]
+//   createdAt    DateTime                @default(now())
+//   updatedAt    DateTime                @updatedAt
+
+//   @@unique([email])
+//   @@unique([idNumber])
+//   @@index([mobileNumber])
+// }
+
+// model MedicalCustomerPolicy {
+//   code         Int              @id @default(autoincrement())
+//   customer     MedicalCustomer  @relation(fields: [customerCode], references: [code])
+//   customerCode Int
+//   premium      Decimal          @db.Decimal(12, 2)
+//   products     MedicalProduct[]
+// }
+
+// model CustomerDependant {
+//   code         Int             @id @default(autoincrement())
+//   fullName     String
+//   dob          String
+//   relationship Relationship
+//   customer     MedicalCustomer @relation(fields: [customerCode], references: [code])
+//   customerCode Int
+
+//   @@unique([customerCode, fullName])
+// }
+
+// enum Sharing {
+//   PF
+//   PP
+// }
+
+// enum Relationship {
+//   SPOUSE
+//   CHILD
+// }

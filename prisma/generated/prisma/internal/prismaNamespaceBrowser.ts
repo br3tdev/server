@@ -76,8 +76,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const MedicalProductScalarFieldEnum = {
   code: 'code',
-  name: 'name',
-  medicalCustomerPolicyCode: 'medicalCustomerPolicyCode'
+  name: 'name'
 } as const
 
 export type MedicalProductScalarFieldEnum = (typeof MedicalProductScalarFieldEnum)[keyof typeof MedicalProductScalarFieldEnum]
@@ -109,6 +108,7 @@ export type MedicalCustomerScalarFieldEnum = (typeof MedicalCustomerScalarFieldE
 export const MedicalCustomerPolicyScalarFieldEnum = {
   code: 'code',
   customerCode: 'customerCode',
+  policyType: 'policyType',
   premium: 'premium'
 } as const
 
@@ -140,12 +140,4 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

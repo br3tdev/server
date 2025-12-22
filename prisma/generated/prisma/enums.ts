@@ -9,12 +9,12 @@
 * 🟢 You can import this file directly.
 */
 
-export const Sharing = {
-  PF: 'PF',
-  PP: 'PP'
+export const SharingType = {
+  PER_FAMILY: 'PF',
+  PER_PERSON: 'PP'
 } as const
 
-export type Sharing = (typeof Sharing)[keyof typeof Sharing]
+export type SharingType = (typeof SharingType)[keyof typeof SharingType]
 
 
 export const Relationship = {

@@ -41,18 +41,21 @@ export type MedicalCustomerPolicySumAggregateOutputType = {
 export type MedicalCustomerPolicyMinAggregateOutputType = {
   code: number | null
   customerCode: number | null
+  policyType: $Enums.SharingType | null
   premium: runtime.Decimal | null
 }
 
 export type MedicalCustomerPolicyMaxAggregateOutputType = {
   code: number | null
   customerCode: number | null
+  policyType: $Enums.SharingType | null
   premium: runtime.Decimal | null
 }
 
 export type MedicalCustomerPolicyCountAggregateOutputType = {
   code: number
   customerCode: number
+  policyType: number
   premium: number
   _all: number
 }
@@ -73,18 +76,21 @@ export type MedicalCustomerPolicySumAggregateInputType = {
 export type MedicalCustomerPolicyMinAggregateInputType = {
   code?: true
   customerCode?: true
+  policyType?: true
   premium?: true
 }
 
 export type MedicalCustomerPolicyMaxAggregateInputType = {
   code?: true
   customerCode?: true
+  policyType?: true
   premium?: true
 }
 
 export type MedicalCustomerPolicyCountAggregateInputType = {
   code?: true
   customerCode?: true
+  policyType?: true
   premium?: true
   _all?: true
 }
@@ -178,6 +184,7 @@ export type MedicalCustomerPolicyGroupByArgs<ExtArgs extends runtime.Types.Exten
 export type MedicalCustomerPolicyGroupByOutputType = {
   code: number
   customerCode: number
+  policyType: $Enums.SharingType
   premium: runtime.Decimal
   _count: MedicalCustomerPolicyCountAggregateOutputType | null
   _avg: MedicalCustomerPolicyAvgAggregateOutputType | null
@@ -207,6 +214,7 @@ export type MedicalCustomerPolicyWhereInput = {
   NOT?: Prisma.MedicalCustomerPolicyWhereInput | Prisma.MedicalCustomerPolicyWhereInput[]
   code?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
   customerCode?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
+  policyType?: Prisma.EnumSharingTypeFilter<"MedicalCustomerPolicy"> | $Enums.SharingType
   premium?: Prisma.DecimalFilter<"MedicalCustomerPolicy"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   customer?: Prisma.XOR<Prisma.MedicalCustomerScalarRelationFilter, Prisma.MedicalCustomerWhereInput>
   products?: Prisma.MedicalProductListRelationFilter
@@ -215,6 +223,7 @@ export type MedicalCustomerPolicyWhereInput = {
 export type MedicalCustomerPolicyOrderByWithRelationInput = {
   code?: Prisma.SortOrder
   customerCode?: Prisma.SortOrder
+  policyType?: Prisma.SortOrder
   premium?: Prisma.SortOrder
   customer?: Prisma.MedicalCustomerOrderByWithRelationInput
   products?: Prisma.MedicalProductOrderByRelationAggregateInput
@@ -226,6 +235,7 @@ export type MedicalCustomerPolicyWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MedicalCustomerPolicyWhereInput[]
   NOT?: Prisma.MedicalCustomerPolicyWhereInput | Prisma.MedicalCustomerPolicyWhereInput[]
   customerCode?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
+  policyType?: Prisma.EnumSharingTypeFilter<"MedicalCustomerPolicy"> | $Enums.SharingType
   premium?: Prisma.DecimalFilter<"MedicalCustomerPolicy"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   customer?: Prisma.XOR<Prisma.MedicalCustomerScalarRelationFilter, Prisma.MedicalCustomerWhereInput>
   products?: Prisma.MedicalProductListRelationFilter
@@ -234,6 +244,7 @@ export type MedicalCustomerPolicyWhereUniqueInput = Prisma.AtLeast<{
 export type MedicalCustomerPolicyOrderByWithAggregationInput = {
   code?: Prisma.SortOrder
   customerCode?: Prisma.SortOrder
+  policyType?: Prisma.SortOrder
   premium?: Prisma.SortOrder
   _count?: Prisma.MedicalCustomerPolicyCountOrderByAggregateInput
   _avg?: Prisma.MedicalCustomerPolicyAvgOrderByAggregateInput
@@ -248,54 +259,57 @@ export type MedicalCustomerPolicyScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MedicalCustomerPolicyScalarWhereWithAggregatesInput | Prisma.MedicalCustomerPolicyScalarWhereWithAggregatesInput[]
   code?: Prisma.IntWithAggregatesFilter<"MedicalCustomerPolicy"> | number
   customerCode?: Prisma.IntWithAggregatesFilter<"MedicalCustomerPolicy"> | number
+  policyType?: Prisma.EnumSharingTypeWithAggregatesFilter<"MedicalCustomerPolicy"> | $Enums.SharingType
   premium?: Prisma.DecimalWithAggregatesFilter<"MedicalCustomerPolicy"> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type MedicalCustomerPolicyCreateInput = {
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
   customer: Prisma.MedicalCustomerCreateNestedOneWithoutPoliciesInput
-  products?: Prisma.MedicalProductCreateNestedManyWithoutMedicalCustomerPolicyInput
+  products?: Prisma.MedicalProductCreateNestedManyWithoutPoliciesInput
 }
 
 export type MedicalCustomerPolicyUncheckedCreateInput = {
   code?: number
   customerCode: number
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
-  products?: Prisma.MedicalProductUncheckedCreateNestedManyWithoutMedicalCustomerPolicyInput
+  products?: Prisma.MedicalProductUncheckedCreateNestedManyWithoutPoliciesInput
 }
 
 export type MedicalCustomerPolicyUpdateInput = {
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   customer?: Prisma.MedicalCustomerUpdateOneRequiredWithoutPoliciesNestedInput
-  products?: Prisma.MedicalProductUpdateManyWithoutMedicalCustomerPolicyNestedInput
+  products?: Prisma.MedicalProductUpdateManyWithoutPoliciesNestedInput
 }
 
 export type MedicalCustomerPolicyUncheckedUpdateInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   customerCode?: Prisma.IntFieldUpdateOperationsInput | number
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  products?: Prisma.MedicalProductUncheckedUpdateManyWithoutMedicalCustomerPolicyNestedInput
+  products?: Prisma.MedicalProductUncheckedUpdateManyWithoutPoliciesNestedInput
 }
 
 export type MedicalCustomerPolicyCreateManyInput = {
   code?: number
   customerCode: number
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type MedicalCustomerPolicyUpdateManyMutationInput = {
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type MedicalCustomerPolicyUncheckedUpdateManyInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
   customerCode?: Prisma.IntFieldUpdateOperationsInput | number
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type MedicalCustomerPolicyNullableScalarRelationFilter = {
-  is?: Prisma.MedicalCustomerPolicyWhereInput | null
-  isNot?: Prisma.MedicalCustomerPolicyWhereInput | null
 }
 
 export type MedicalCustomerPolicyListRelationFilter = {
@@ -311,6 +325,7 @@ export type MedicalCustomerPolicyOrderByRelationAggregateInput = {
 export type MedicalCustomerPolicyCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   customerCode?: Prisma.SortOrder
+  policyType?: Prisma.SortOrder
   premium?: Prisma.SortOrder
 }
 
@@ -323,12 +338,14 @@ export type MedicalCustomerPolicyAvgOrderByAggregateInput = {
 export type MedicalCustomerPolicyMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   customerCode?: Prisma.SortOrder
+  policyType?: Prisma.SortOrder
   premium?: Prisma.SortOrder
 }
 
 export type MedicalCustomerPolicyMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   customerCode?: Prisma.SortOrder
+  policyType?: Prisma.SortOrder
   premium?: Prisma.SortOrder
 }
 
@@ -338,20 +355,42 @@ export type MedicalCustomerPolicySumOrderByAggregateInput = {
   premium?: Prisma.SortOrder
 }
 
-export type MedicalCustomerPolicyCreateNestedOneWithoutProductsInput = {
-  create?: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput>
-  connectOrCreate?: Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput
-  connect?: Prisma.MedicalCustomerPolicyWhereUniqueInput
+export type MedicalCustomerPolicyCreateNestedManyWithoutProductsInput = {
+  create?: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput> | Prisma.MedicalCustomerPolicyCreateWithoutProductsInput[] | Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput[]
+  connectOrCreate?: Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput | Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput[]
+  connect?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
 }
 
-export type MedicalCustomerPolicyUpdateOneWithoutProductsNestedInput = {
-  create?: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput>
-  connectOrCreate?: Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput
-  upsert?: Prisma.MedicalCustomerPolicyUpsertWithoutProductsInput
-  disconnect?: Prisma.MedicalCustomerPolicyWhereInput | boolean
-  delete?: Prisma.MedicalCustomerPolicyWhereInput | boolean
-  connect?: Prisma.MedicalCustomerPolicyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MedicalCustomerPolicyUpdateToOneWithWhereWithoutProductsInput, Prisma.MedicalCustomerPolicyUpdateWithoutProductsInput>, Prisma.MedicalCustomerPolicyUncheckedUpdateWithoutProductsInput>
+export type MedicalCustomerPolicyUncheckedCreateNestedManyWithoutProductsInput = {
+  create?: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput> | Prisma.MedicalCustomerPolicyCreateWithoutProductsInput[] | Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput[]
+  connectOrCreate?: Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput | Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput[]
+  connect?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+}
+
+export type MedicalCustomerPolicyUpdateManyWithoutProductsNestedInput = {
+  create?: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput> | Prisma.MedicalCustomerPolicyCreateWithoutProductsInput[] | Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput[]
+  connectOrCreate?: Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput | Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput[]
+  upsert?: Prisma.MedicalCustomerPolicyUpsertWithWhereUniqueWithoutProductsInput | Prisma.MedicalCustomerPolicyUpsertWithWhereUniqueWithoutProductsInput[]
+  set?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  disconnect?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  delete?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  connect?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  update?: Prisma.MedicalCustomerPolicyUpdateWithWhereUniqueWithoutProductsInput | Prisma.MedicalCustomerPolicyUpdateWithWhereUniqueWithoutProductsInput[]
+  updateMany?: Prisma.MedicalCustomerPolicyUpdateManyWithWhereWithoutProductsInput | Prisma.MedicalCustomerPolicyUpdateManyWithWhereWithoutProductsInput[]
+  deleteMany?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
+}
+
+export type MedicalCustomerPolicyUncheckedUpdateManyWithoutProductsNestedInput = {
+  create?: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput> | Prisma.MedicalCustomerPolicyCreateWithoutProductsInput[] | Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput[]
+  connectOrCreate?: Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput | Prisma.MedicalCustomerPolicyCreateOrConnectWithoutProductsInput[]
+  upsert?: Prisma.MedicalCustomerPolicyUpsertWithWhereUniqueWithoutProductsInput | Prisma.MedicalCustomerPolicyUpsertWithWhereUniqueWithoutProductsInput[]
+  set?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  disconnect?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  delete?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  connect?: Prisma.MedicalCustomerPolicyWhereUniqueInput | Prisma.MedicalCustomerPolicyWhereUniqueInput[]
+  update?: Prisma.MedicalCustomerPolicyUpdateWithWhereUniqueWithoutProductsInput | Prisma.MedicalCustomerPolicyUpdateWithWhereUniqueWithoutProductsInput[]
+  updateMany?: Prisma.MedicalCustomerPolicyUpdateManyWithWhereWithoutProductsInput | Prisma.MedicalCustomerPolicyUpdateManyWithWhereWithoutProductsInput[]
+  deleteMany?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
 }
 
 export type MedicalCustomerPolicyCreateNestedManyWithoutCustomerInput = {
@@ -396,6 +435,10 @@ export type MedicalCustomerPolicyUncheckedUpdateManyWithoutCustomerNestedInput =
   deleteMany?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
 }
 
+export type EnumSharingTypeFieldUpdateOperationsInput = {
+  set?: $Enums.SharingType
+}
+
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -405,6 +448,7 @@ export type DecimalFieldUpdateOperationsInput = {
 }
 
 export type MedicalCustomerPolicyCreateWithoutProductsInput = {
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
   customer: Prisma.MedicalCustomerCreateNestedOneWithoutPoliciesInput
 }
@@ -412,6 +456,7 @@ export type MedicalCustomerPolicyCreateWithoutProductsInput = {
 export type MedicalCustomerPolicyUncheckedCreateWithoutProductsInput = {
   code?: number
   customerCode: number
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
@@ -420,37 +465,43 @@ export type MedicalCustomerPolicyCreateOrConnectWithoutProductsInput = {
   create: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput>
 }
 
-export type MedicalCustomerPolicyUpsertWithoutProductsInput = {
+export type MedicalCustomerPolicyUpsertWithWhereUniqueWithoutProductsInput = {
+  where: Prisma.MedicalCustomerPolicyWhereUniqueInput
   update: Prisma.XOR<Prisma.MedicalCustomerPolicyUpdateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedUpdateWithoutProductsInput>
   create: Prisma.XOR<Prisma.MedicalCustomerPolicyCreateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedCreateWithoutProductsInput>
-  where?: Prisma.MedicalCustomerPolicyWhereInput
 }
 
-export type MedicalCustomerPolicyUpdateToOneWithWhereWithoutProductsInput = {
-  where?: Prisma.MedicalCustomerPolicyWhereInput
+export type MedicalCustomerPolicyUpdateWithWhereUniqueWithoutProductsInput = {
+  where: Prisma.MedicalCustomerPolicyWhereUniqueInput
   data: Prisma.XOR<Prisma.MedicalCustomerPolicyUpdateWithoutProductsInput, Prisma.MedicalCustomerPolicyUncheckedUpdateWithoutProductsInput>
 }
 
-export type MedicalCustomerPolicyUpdateWithoutProductsInput = {
-  premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  customer?: Prisma.MedicalCustomerUpdateOneRequiredWithoutPoliciesNestedInput
+export type MedicalCustomerPolicyUpdateManyWithWhereWithoutProductsInput = {
+  where: Prisma.MedicalCustomerPolicyScalarWhereInput
+  data: Prisma.XOR<Prisma.MedicalCustomerPolicyUpdateManyMutationInput, Prisma.MedicalCustomerPolicyUncheckedUpdateManyWithoutProductsInput>
 }
 
-export type MedicalCustomerPolicyUncheckedUpdateWithoutProductsInput = {
-  code?: Prisma.IntFieldUpdateOperationsInput | number
-  customerCode?: Prisma.IntFieldUpdateOperationsInput | number
-  premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+export type MedicalCustomerPolicyScalarWhereInput = {
+  AND?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
+  OR?: Prisma.MedicalCustomerPolicyScalarWhereInput[]
+  NOT?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
+  code?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
+  customerCode?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
+  policyType?: Prisma.EnumSharingTypeFilter<"MedicalCustomerPolicy"> | $Enums.SharingType
+  premium?: Prisma.DecimalFilter<"MedicalCustomerPolicy"> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type MedicalCustomerPolicyCreateWithoutCustomerInput = {
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
-  products?: Prisma.MedicalProductCreateNestedManyWithoutMedicalCustomerPolicyInput
+  products?: Prisma.MedicalProductCreateNestedManyWithoutPoliciesInput
 }
 
 export type MedicalCustomerPolicyUncheckedCreateWithoutCustomerInput = {
   code?: number
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
-  products?: Prisma.MedicalProductUncheckedCreateNestedManyWithoutMedicalCustomerPolicyInput
+  products?: Prisma.MedicalProductUncheckedCreateNestedManyWithoutPoliciesInput
 }
 
 export type MedicalCustomerPolicyCreateOrConnectWithoutCustomerInput = {
@@ -479,33 +530,48 @@ export type MedicalCustomerPolicyUpdateManyWithWhereWithoutCustomerInput = {
   data: Prisma.XOR<Prisma.MedicalCustomerPolicyUpdateManyMutationInput, Prisma.MedicalCustomerPolicyUncheckedUpdateManyWithoutCustomerInput>
 }
 
-export type MedicalCustomerPolicyScalarWhereInput = {
-  AND?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
-  OR?: Prisma.MedicalCustomerPolicyScalarWhereInput[]
-  NOT?: Prisma.MedicalCustomerPolicyScalarWhereInput | Prisma.MedicalCustomerPolicyScalarWhereInput[]
-  code?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
-  customerCode?: Prisma.IntFilter<"MedicalCustomerPolicy"> | number
-  premium?: Prisma.DecimalFilter<"MedicalCustomerPolicy"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+export type MedicalCustomerPolicyUpdateWithoutProductsInput = {
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
+  premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  customer?: Prisma.MedicalCustomerUpdateOneRequiredWithoutPoliciesNestedInput
+}
+
+export type MedicalCustomerPolicyUncheckedUpdateWithoutProductsInput = {
+  code?: Prisma.IntFieldUpdateOperationsInput | number
+  customerCode?: Prisma.IntFieldUpdateOperationsInput | number
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
+  premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type MedicalCustomerPolicyUncheckedUpdateManyWithoutProductsInput = {
+  code?: Prisma.IntFieldUpdateOperationsInput | number
+  customerCode?: Prisma.IntFieldUpdateOperationsInput | number
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
+  premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type MedicalCustomerPolicyCreateManyCustomerInput = {
   code?: number
+  policyType: $Enums.SharingType
   premium: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type MedicalCustomerPolicyUpdateWithoutCustomerInput = {
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  products?: Prisma.MedicalProductUpdateManyWithoutMedicalCustomerPolicyNestedInput
+  products?: Prisma.MedicalProductUpdateManyWithoutPoliciesNestedInput
 }
 
 export type MedicalCustomerPolicyUncheckedUpdateWithoutCustomerInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  products?: Prisma.MedicalProductUncheckedUpdateManyWithoutMedicalCustomerPolicyNestedInput
+  products?: Prisma.MedicalProductUncheckedUpdateManyWithoutPoliciesNestedInput
 }
 
 export type MedicalCustomerPolicyUncheckedUpdateManyWithoutCustomerInput = {
   code?: Prisma.IntFieldUpdateOperationsInput | number
+  policyType?: Prisma.EnumSharingTypeFieldUpdateOperationsInput | $Enums.SharingType
   premium?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
@@ -543,6 +609,7 @@ export type MedicalCustomerPolicyCountOutputTypeCountProductsArgs<ExtArgs extend
 export type MedicalCustomerPolicySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   customerCode?: boolean
+  policyType?: boolean
   premium?: boolean
   customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
   products?: boolean | Prisma.MedicalCustomerPolicy$productsArgs<ExtArgs>
@@ -552,6 +619,7 @@ export type MedicalCustomerPolicySelect<ExtArgs extends runtime.Types.Extensions
 export type MedicalCustomerPolicySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   customerCode?: boolean
+  policyType?: boolean
   premium?: boolean
   customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["medicalCustomerPolicy"]>
@@ -559,6 +627,7 @@ export type MedicalCustomerPolicySelectCreateManyAndReturn<ExtArgs extends runti
 export type MedicalCustomerPolicySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   code?: boolean
   customerCode?: boolean
+  policyType?: boolean
   premium?: boolean
   customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["medicalCustomerPolicy"]>
@@ -566,10 +635,11 @@ export type MedicalCustomerPolicySelectUpdateManyAndReturn<ExtArgs extends runti
 export type MedicalCustomerPolicySelectScalar = {
   code?: boolean
   customerCode?: boolean
+  policyType?: boolean
   premium?: boolean
 }
 
-export type MedicalCustomerPolicyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "customerCode" | "premium", ExtArgs["result"]["medicalCustomerPolicy"]>
+export type MedicalCustomerPolicyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "customerCode" | "policyType" | "premium", ExtArgs["result"]["medicalCustomerPolicy"]>
 export type MedicalCustomerPolicyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.MedicalCustomerDefaultArgs<ExtArgs>
   products?: boolean | Prisma.MedicalCustomerPolicy$productsArgs<ExtArgs>
@@ -591,6 +661,7 @@ export type $MedicalCustomerPolicyPayload<ExtArgs extends runtime.Types.Extensio
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     code: number
     customerCode: number
+    policyType: $Enums.SharingType
     premium: runtime.Decimal
   }, ExtArgs["result"]["medicalCustomerPolicy"]>
   composites: {}
@@ -1019,6 +1090,7 @@ export interface Prisma__MedicalCustomerPolicyClient<T, Null = never, ExtArgs ex
 export interface MedicalCustomerPolicyFieldRefs {
   readonly code: Prisma.FieldRef<"MedicalCustomerPolicy", 'Int'>
   readonly customerCode: Prisma.FieldRef<"MedicalCustomerPolicy", 'Int'>
+  readonly policyType: Prisma.FieldRef<"MedicalCustomerPolicy", 'SharingType'>
   readonly premium: Prisma.FieldRef<"MedicalCustomerPolicy", 'Decimal'>
 }
     

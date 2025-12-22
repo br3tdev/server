@@ -2,7 +2,8 @@ import UssdMenu from "ussd-menu-builder"
 import _ from "lodash"
 
 import self from "./tulizo-self";
-import family from "./tulizo-family";
+// import family from "./tulizo-family";
+import family from "./b";
 
 
 const tulizo = (menu: UssdMenu) => {
