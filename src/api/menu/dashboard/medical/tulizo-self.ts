@@ -1,7 +1,8 @@
-import UssdMenu from "ussd-menu-builder"
-import { prisma } from "../../../../../lib/db";
+import type UssdMenu from "ussd-menu-builder";
+
+import { prisma } from "../../../../../lib/db.js";
 import MedicalService from "../../../../../services/medical.service";
-import { formatPlanOptions } from "../../../../../utils/common";
+import { formatPlanOptions } from "../../../../../utils/common.js";
 
 const VALIDATION_PATTERNS = {
   dob: "*\\d{2}/\\d{2}/\\d{4}",
@@ -22,158 +23,169 @@ type CustomerKyc = {
   dependants?: Array<{
     dob: string;
     fullName: string;
-    relationship: 'Spouse' | 'Child';
+    relationship: "Spouse" | "Child";
   }>;
   currentDependantIndex?: number;
   currentDependantData?: {
     dob?: string;
     fullName?: string;
-    relationship?: 'Spouse' | 'Child';
+    relationship?: "Spouse" | "Child";
   };
-}
-
-interface PolicyOption {
-  id: string;
-  displayText: string;
-  policyDetails: string;
-}
-
-const POLICY_OPTIONS: Record<string, PolicyOption> = {
-  base: {
-    id: "base",
-    displayText: "IP 1M, OP 500K, Mat 250K",
-    policyDetails: "IP 1M, OP 500K, Mat 250K"
-  },
-  max: {
-    id: "max",
-    displayText: "IP 2M, OP 700K, Mat 550K",
-    policyDetails: "IP 2M, OP 700K, Mat 550K"
-  },
-  lite: {
-    id: "lite",
-    displayText: "IP 3M, OP 500K",
-    policyDetails: "IP 3M, OP 500K"
-  }
 };
 
+// type PolicyOption = {
+//   id: string;
+//   displayText: string;
+//   policyDetails: string;
+// };
+
+// const POLICY_OPTIONS: Record<string, PolicyOption> = {
+//   base: {
+//     id: "base",
+//     displayText: "IP 1M, OP 500K, Mat 250K",
+//     policyDetails: "IP 1M, OP 500K, Mat 250K",
+//   },
+//   max: {
+//     id: "max",
+//     displayText: "IP 2M, OP 700K, Mat 550K",
+//     policyDetails: "IP 2M, OP 700K, Mat 550K",
+//   },
+//   lite: {
+//     id: "lite",
+//     displayText: "IP 3M, OP 500K",
+//     policyDetails: "IP 3M, OP 500K",
+//   },
+// };
+
 // Upgrade to Redis or other Storage Driver
-let session: { [sessionId: string]: CustomerKyc } = {};
+const session: { [sessionId: string]: CustomerKyc } = {};
 
-let initialMessage = `Select preferred benefits:\n1. IP 1M, OP 500K, Mat 250K\n2. IP 2M, OP 700K, Mat 550K\n99. Go back`
+const initialMessage = `Choose your Tulizo Bora plan:\n1. IP 1M, OP 500K, Mat 250K\n2. IP 2M, OP 700K, Mat 550K\n0. Back to menu`;
 
-const tulizoSelf = (menu: UssdMenu) => {
-    menu.state("tulizo.self", {
-        run: async () => {
-            // ! TODO: Pull benefits from database
-            const benefits = await MedicalService.getMedicalProductBenefits();
-            if (benefits) {
-                let message = formatPlanOptions(benefits)
-                menu.con(message)
-            } else {
-                menu.end(`Service unavailable`)
-            }
-        },
-        next: {
-            "1": "tulizo.self.base",
-            "2": "tulizo.self.max"
-        },
-        defaultNext: "invalidOption"
-    })
+function tulizoSelf(menu: UssdMenu) {
+  menu.state("tulizo.self", {
+    run: async () => {
+      // ! TODO: Pull benefits from database
+      const benefits = await MedicalService.getMedicalProductBenefits();
+      if (benefits) {
+        const message = formatPlanOptions(benefits);
+        menu.con(message);
+      }
+      else {
+        menu.con(initialMessage);
+      }
+    },
+    next: {
+      1: "tulizo.self.base",
+      2: "tulizo.self.max",
+      0: "dashboard.medical",
+    },
+    defaultNext: "invalidOption",
+  });
 
-    menu.state("tulizo.self.base", {
-        run: () => {
-            const { val, args: { sessionId } } = menu;
-            session[sessionId] = { policy: "IP 1M, OP 500K, Mat 250K" }
-            menu.con(`Enter DOB: (dd/mm/yyyy)`)
-        },
-        next: {
-            [VALIDATION_PATTERNS.dob]: "base.fullName.process",
-        },
-        defaultNext: "invalidOption"
-    })
+  menu.state("medical.tulizo.self.invalidOption", {
+    run: () => {
+      menu.con(`Invalid option. Please select a valid option:\n1. IP 1M, OP 500K, Mat 250K\n2. IP 2M, OP 700K, Mat 550K\n0. Back to menu`);
+    },
+    next: {
+      1: "medical.tulizo.self.base",
+      2: "medical.tulizo.self.max",
+      0: "dashboard.medical",
+    },
+    defaultNext: "medical.tulizo.self.invalidOption",
+  });
 
+  menu.state("tulizo.self.base", {
+    run: () => {
+      const { args: { sessionId } } = menu;
+      session[sessionId] = { policy: "IP 1M, OP 500K, Mat 250K" };
+      menu.con(`Enter DOB: (dd/mm/yyyy)`);
+    },
+    next: {
+      [VALIDATION_PATTERNS.dob]: "base.fullName.process",
+    },
+    defaultNext: "invalidOption",
+  });
 
-    menu.state("tulizo.self.max", {
-        run: () => {
-            const { val, args: { sessionId } } = menu;
-            session[sessionId] = { policy: "IP 2M, OP 700K, Mat 550K" }
-            menu.con(`Enter DOB: (dd/mm/yyyy)`)
-        },
-        next: {
-            [VALIDATION_PATTERNS.dob]: "base.fullName.process",
-        },
-        defaultNext: "invalidOption"
-    })
+  menu.state("tulizo.self.max", {
+    run: () => {
+      const { args: { sessionId } } = menu;
+      session[sessionId] = { policy: "IP 2M, OP 700K, Mat 550K" };
+      menu.con(`Enter DOB: (dd/mm/yyyy)`);
+    },
+    next: {
+      [VALIDATION_PATTERNS.dob]: "base.fullName.process",
+    },
+    defaultNext: "invalidOption",
+  });
 
-    menu.state("base.fullName.process", {
-        run: () => {
-            const { val, args: { sessionId } } = menu;
-            session[sessionId].dob = val ;
-            menu.con(`Enter Full Name:`)
-        },
-        next: {
-            [VALIDATION_PATTERNS.name]: "base.idNumber.process",
-        },
-        defaultNext: "invalidOption"
-    })
+  menu.state("base.fullName.process", {
+    run: () => {
+      const { val, args: { sessionId } } = menu;
+      session[sessionId].dob = val;
+      menu.con(`Enter Full Name:`);
+    },
+    next: {
+      [VALIDATION_PATTERNS.name]: "base.idNumber.process",
+    },
+    defaultNext: "invalidOption",
+  });
 
-    menu.state("base.idNumber.process", {
-        run: () => {
-            const { val, args: { sessionId } } = menu;
-            session[sessionId].fullName = val;
-            menu.con(`Enter ID Number:`)
-        },
-        next: {
-            [VALIDATION_PATTERNS.idNumber]: "base.email.process"
-        },
-        defaultNext: "invalidOption"
-    })
+  menu.state("base.idNumber.process", {
+    run: () => {
+      const { val, args: { sessionId } } = menu;
+      session[sessionId].fullName = val;
+      menu.con(`Enter ID Number:`);
+    },
+    next: {
+      [VALIDATION_PATTERNS.idNumber]: "base.email.process",
+    },
+    defaultNext: "invalidOption",
+  });
 
-    menu.state("base.email.process", {
-        run: () => {
-            const { val, args: { sessionId } } = menu;
-            session[sessionId].idNumber = val;
-            menu.con(`Enter email address:`)
-        },
-        next: {
-            [VALIDATION_PATTERNS.email]: "process.end"
-        },
-        defaultNext: "invalidOption"
-    })
+  menu.state("base.email.process", {
+    run: () => {
+      const { val, args: { sessionId } } = menu;
+      session[sessionId].idNumber = val;
+      menu.con(`Enter email address:`);
+    },
+    next: {
+      [VALIDATION_PATTERNS.email]: "process.end",
+    },
+    defaultNext: "invalidOption",
+  });
 
-    menu.state("process.end", {
-        run:  async () => {
-            const { val, args: { sessionId, phoneNumber } } = menu;
-            session[sessionId].email = val;
+  menu.state("process.end", {
+    run: async () => {
+      const { val, args: { sessionId, phoneNumber } } = menu;
+      session[sessionId].email = val;
 
-            console.log(sessionId)
+      const { dob, email, fullName, idNumber } = session[sessionId];
 
-            const { dob, email, fullName, idNumber } = session[sessionId]
+      if (dob && email && fullName && idNumber) {
+        const medicalCustomer = await prisma?.medicalCustomer.create({
+          data: {
+            mobileNumber: phoneNumber,
+            dob,
+            fullName,
+            email: val,
+            idNumber,
+          },
+        });
+        console.log(session[sessionId]);
+        console.log(medicalCustomer);
 
-            if (dob && email && fullName && idNumber) {
-                const medicalCustomer = await prisma?.medicalCustomer.create({
-                    data: {
-                        mobileNumber: phoneNumber,
-                        dob,
-                        fullName,
-                        email: val,
-                        idNumber
-                    }
-                })
-                console.log(session[sessionId])
-                console.log(medicalCustomer)
+        if (medicalCustomer) {
+          menu.end(`✓ Application successful!\nYour detailed quote will be sent to your email shortly.\nThank you for choosing us.`);
+        }
+      }
+      else {
+        menu.end(`Error occured`);
+      }
+    },
+  });
 
-                if (medicalCustomer) {
-                    menu.end(`✓ Application successful!\nYour detailed quote will be sent to your email shortly.\nThank you for choosing us.`);
-                } 
-            } else {
-                menu.end(`Error occured`)
-            }
-            
-        },
-    })
-
-    return menu
+  return menu;
 }
 
 export default tulizoSelf;

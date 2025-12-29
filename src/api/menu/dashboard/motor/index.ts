@@ -1,37 +1,32 @@
-import express from "express"
-import UssdMenu from "ussd-menu-builder"
-import _ from "lodash"
+import type UssdMenu from "ussd-menu-builder";
 
-import { prisma } from "../../../../../lib/db";
+const motorCoverInstructions = `Choose medical product. \n1. Get Comprehensive Insurance`;
 
+function motor(menu: UssdMenu) {
+  menu.state("dashboard.motor", {
+    run: async () => {
+      menu.con(motorCoverInstructions);
+    },
 
-const motorCoverInstructions = `Choose medical product. \n1. Get Comprehensive Insurance`
+    next: {
+      1: "comp",
+    },
+    defaultNext: "invalidOption",
+  });
 
-const motor = (menu: UssdMenu) => {
-    menu.state("dashboard.motor", {
-        run: async () => {
-            menu.con(motorCoverInstructions)
-        },
-        
-        next: {
-            "1": "comp",
-        },
-        defaultNext: "invalidOption"
-    });
+  menu.state("invalidOption", {
+    run: () => {
+      menu.end("Invalid option");
+    },
+  });
 
-    menu.state("invalidOption", {
-        run: () => {
-            menu.end("Invalid option")
-        }
-    });
+  menu.state("comp", {
+    run: () => {
+      menu.end("Comprehensive cover user flow goes here");
+    },
+  });
 
-    menu.state("comp", {
-        run: () => {
-           menu.end("Comprehensive cover user flow goes here")
-        }
-    })
-
-    return menu;
+  return menu;
 }
 
 export default motor;

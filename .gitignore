@@ -77,3 +77,8 @@ dist
 .env*.local
 
 /src/generated/prisma
+
+# Temp files
+a.ts
+b.ts
+messages.ts

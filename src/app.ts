@@ -3,11 +3,12 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import type MessageResponse from "./interfaces/message-response.js";
+import type MessageResponse from "./interfaces/message-response";
 
 import { prisma } from "../lib/db";
-import api from "./api/index.js";
-import * as middlewares from "./middlewares.js";
+import api from "./api/index";
+import { env } from "./env";
+import * as middlewares from "./middlewares";
 
 const app = express();
 
@@ -29,16 +30,17 @@ app.get<object, unknown>("/health", async (req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
     db = "up";
-  } catch (_) {}
+  }
+  catch (_) {}
 
   res.status(200).json({
     status: "OK",
     uptime: process.uptime(),
     timestamp: Date.now(),
-    environment: process.env.NODE_ENV,
-    db
+    environment: env.NODE_ENV,
+    db,
   });
-})
+});
 
 app.use("/api/v1", api);
 
