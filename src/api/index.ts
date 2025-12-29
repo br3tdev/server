@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // Register the USSD APP
 router.post("/", (req, res) => {
-  menu(req).run(req.body, (ussdResult: any) => {
+  menu().run(req.body, (ussdResult: any) => {
     res.send(ussdResult);
   });
 });
