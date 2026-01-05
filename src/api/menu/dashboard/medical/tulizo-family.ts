@@ -1,7 +1,7 @@
 import type UssdMenu from "ussd-menu-builder";
 
-import { prisma } from "../../../../../lib/db";
-import { VALIDATION_PATTERNS } from "../../../../../utils/validation-patterns";
+import { prisma } from "#lib/db";
+import { VALIDATION_PATTERNS } from "#utils/validation-patterns";
 
 type CustomerKyc = {
   dob?: string;
