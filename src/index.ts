@@ -1,14 +1,6 @@
 import app from "./app.js";
 import { env } from "./env.js";
-import { register } from 'tsconfig-paths';
 
-const tsConfig = require('./tsconfig.json');
-
-// Register path aliases before any other imports
-register({
-  baseUrl: tsConfig.compilerOptions.baseUrl || '.',
-  paths: tsConfig.compilerOptions.paths || {},
-});
 
 const port = env.PORT;
 const server = app.listen(port, () => {
