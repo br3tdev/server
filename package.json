@@ -4,12 +4,6 @@
   "license": "MIT",
   "keywords": [],
   "main": "src/index.ts",
-  "imports": {
-    "#lib/*": "./lib/*",
-    "#services/*": "./services/*",
-    "#utils/*": "./utils/*",
-    "#src/*": "./src/*"
-  },
   "scripts": {
     "start": "node --env-file=.env dist/src/index.js -r tsconfig-paths/register dist/index.js",
     "dev": "tsx watch --env-file=.env src/index.ts",
