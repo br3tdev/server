@@ -71,7 +71,6 @@ function tulizoFamily(menu: UssdMenu) {
     defaultNext: "medical.tulizo.family.invalidOption",
   });
 
-
   const createPlanState = (planType: string, planName: string) => {
     menu.state(`medical.tulizo.family.${planType}`, {
       run: () => {
@@ -410,47 +409,46 @@ function tulizoFamily(menu: UssdMenu) {
     },
   });
 
-  
   return menu;
 }
 
 export default tulizoFamily;
 
 // menu.state("medical.tulizo.family.base", {
-  //     run: () => {
-  //         const { args: { sessionId } } = menu
-  //         session[sessionId] = { policy: "IP 1M, OP 500K, Mat 250K" };
-  //         menu.con(`Enter DOB: (dd/mm/yyyy)`)
-  //     },
-  //     next: {
-  //         [VALIDATION_PATTERNS.dob]: "family.base.fullName.process",
-  //     },
-  //     defaultNext: "invalidOption"
-  // })
+//     run: () => {
+//         const { args: { sessionId } } = menu
+//         session[sessionId] = { policy: "IP 1M, OP 500K, Mat 250K" };
+//         menu.con(`Enter DOB: (dd/mm/yyyy)`)
+//     },
+//     next: {
+//         [VALIDATION_PATTERNS.dob]: "family.base.fullName.process",
+//     },
+//     defaultNext: "invalidOption"
+// })
 
-  // menu.state("family.max", {
-  //     run: () => {
-  //         const { args: { sessionId } } = menu
-  //         session[sessionId] = { policy: "IP 2M, OP 700K, Mat 550K" };
-  //         menu.con(`Enter DOB: (dd/mm/yyyy)`)
-  //     },
-  //     next: {
-  //         [VALIDATION_PATTERNS.dob]: "family.base.fullName.process",
-  //     },
-  //     defaultNext: "invalidOption"
-  // })
+// menu.state("family.max", {
+//     run: () => {
+//         const { args: { sessionId } } = menu
+//         session[sessionId] = { policy: "IP 2M, OP 700K, Mat 550K" };
+//         menu.con(`Enter DOB: (dd/mm/yyyy)`)
+//     },
+//     next: {
+//         [VALIDATION_PATTERNS.dob]: "family.base.fullName.process",
+//     },
+//     defaultNext: "invalidOption"
+// })
 
-  // menu.state("family.lite", {
-  //     run: () => {
-  //         const { args: { sessionId } } = menu
-  //         session[sessionId] = { policy: "IP 3M, OP 500K" };
-  //         menu.con(`Enter DOB: (dd/mm/yyyy)`)
-  //     },
-  //     next: {
-  //         [VALIDATION_PATTERNS.dob]: "family.base.fullName.process",
-  //     },
-  //     defaultNext: "invalidOption"
-  // })
+// menu.state("family.lite", {
+//     run: () => {
+//         const { args: { sessionId } } = menu
+//         session[sessionId] = { policy: "IP 3M, OP 500K" };
+//         menu.con(`Enter DOB: (dd/mm/yyyy)`)
+//     },
+//     next: {
+//         [VALIDATION_PATTERNS.dob]: "family.base.fullName.process",
+//     },
+//     defaultNext: "invalidOption"
+// })
 
 // menu.state("family.base.dependant.dob.process", {
 //     run: () => {

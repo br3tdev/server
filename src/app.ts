@@ -24,14 +24,12 @@ app.get<object, MessageResponse>("/", (req, res) => {
 });
 
 app.get<object, unknown>("/health", async (req, res) => {
-  const start = Date.now();
-
   let db = "down";
   try {
     await prisma.$queryRaw`SELECT 1`;
     db = "up";
   }
-  catch (_) {}
+  catch (_) { console.error(_); }
 
   res.status(200).json({
     status: "OK",
